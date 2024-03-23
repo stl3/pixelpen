@@ -1,0 +1,5 @@
+.DS_Store
+.sconsign.dblite
+.vscode/
+*.os
+/project/addons/net.yarvis.pixel_pen/bin/
