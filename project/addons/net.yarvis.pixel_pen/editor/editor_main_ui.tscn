@@ -1,0 +1,1200 @@
+[gd_scene load_steps=95 format=3 uid="uid://cwymkqj20edan"]
+
+[ext_resource type="Theme" uid="uid://bsuqu64445rmf" path="res://addons/net.yarvis.pixel_pen/resources/default_theme.tres" id="1_lcbg8"]
+[ext_resource type="Script" path="res://addons/net.yarvis.pixel_pen/editor/editor_main_ui/editor_main_ui.gd" id="2_7n4p1"]
+[ext_resource type="Script" path="res://addons/net.yarvis.pixel_pen/classes/theme_config.gd" id="2_qv6xe"]
+[ext_resource type="FontFile" uid="uid://c1co68pfdyucx" path="res://addons/net.yarvis.pixel_pen/resources/fonts/inter/static/Inter-SemiBold.ttf" id="3_h0rgc"]
+[ext_resource type="Script" path="res://addons/net.yarvis.pixel_pen/editor/editor_main_ui/tool_box.gd" id="4_217wj"]
+[ext_resource type="Texture2D" uid="uid://dwkf2ohr2v83i" path="res://addons/net.yarvis.pixel_pen/resources/icon/arrow_selector_24.svg" id="5_ru4it"]
+[ext_resource type="Script" path="res://addons/net.yarvis.pixel_pen/editor/editor_main_ui/button_hover.gd" id="6_fnv4p"]
+[ext_resource type="Texture2D" uid="uid://b6ji5ap5dqm43" path="res://addons/net.yarvis.pixel_pen/resources/icon/move_24.svg" id="7_au01e"]
+[ext_resource type="Texture2D" uid="uid://b0l5u2v1geoqa" path="res://addons/net.yarvis.pixel_pen/resources/icon/pan_24.svg" id="8_x53ql"]
+[ext_resource type="Texture2D" uid="uid://e1bt5aeqa1sa" path="res://addons/net.yarvis.pixel_pen/resources/icon/selection_24.svg" id="9_t4a5x"]
+[ext_resource type="Texture2D" uid="uid://b5rvnjs572e7" path="res://addons/net.yarvis.pixel_pen/resources/icon/pen.svg" id="10_lmurd"]
+[ext_resource type="Texture2D" uid="uid://cc1ybswmjf7ab" path="res://addons/net.yarvis.pixel_pen/resources/icon/brush_24.svg" id="11_xv570"]
+[ext_resource type="Texture2D" uid="uid://xb6aw32de74n" path="res://addons/net.yarvis.pixel_pen/resources/icon/ink_eraser_24.svg" id="12_c8maa"]
+[ext_resource type="Texture2D" uid="uid://2y06j8f8tkpl" path="res://addons/net.yarvis.pixel_pen/resources/icon/line_24.svg" id="13_wlioy"]
+[ext_resource type="Texture2D" uid="uid://beoyjkr8sp3w7" path="res://addons/net.yarvis.pixel_pen/resources/icon/rect_24.svg" id="14_pwm65"]
+[ext_resource type="Texture2D" uid="uid://xbj22k0avhdj" path="res://addons/net.yarvis.pixel_pen/resources/icon/ink_24.svg" id="15_jfpjv"]
+[ext_resource type="Texture2D" uid="uid://bajkdqxni5r16" path="res://addons/net.yarvis.pixel_pen/resources/icon/color_picker_24.svg" id="16_4ibb0"]
+[ext_resource type="Texture2D" uid="uid://b3p83fuwdupfe" path="res://addons/net.yarvis.pixel_pen/resources/icon/zoom_in_24.svg" id="17_rjgfy"]
+[ext_resource type="FontFile" uid="uid://b0re2f6plrnns" path="res://addons/net.yarvis.pixel_pen/resources/fonts/inter/static/Inter-Bold.ttf" id="18_uhe2p"]
+[ext_resource type="Script" path="res://addons/net.yarvis.pixel_pen/editor/editor_main_ui/grid_pallete.gd" id="19_eprkn"]
+[ext_resource type="Script" path="res://addons/net.yarvis.pixel_pen/editor/editor_main_ui/sub_tool.gd" id="20_sif0e"]
+[ext_resource type="Script" path="res://addons/net.yarvis.pixel_pen/editor/editor_main_ui/sub_viewport.gd" id="21_vnetw"]
+[ext_resource type="PackedScene" uid="uid://dde4flu0tmqb3" path="res://addons/net.yarvis.pixel_pen/editor/editor_canvas.tscn" id="22_fuimd"]
+[ext_resource type="Script" path="res://addons/net.yarvis.pixel_pen/editor/editor_main_ui/debug_label.gd" id="23_lv0tc"]
+[ext_resource type="Script" path="res://addons/net.yarvis.pixel_pen/editor/editor_main_ui/preview_container.gd" id="24_i8hkg"]
+[ext_resource type="Shader" path="res://addons/net.yarvis.pixel_pen/resources/editor_canvas.gdshader" id="25_svm3h"]
+[ext_resource type="Script" path="res://addons/net.yarvis.pixel_pen/editor/editor_main_ui/layers_tools.gd" id="26_rb4wp"]
+[ext_resource type="Shader" path="res://addons/net.yarvis.pixel_pen/resources/tint_color.gdshader" id="27_cc1ks"]
+[ext_resource type="Texture2D" uid="uid://cus6gucdrvyh5" path="res://addons/net.yarvis.pixel_pen/resources/icon/menu_24.svg" id="28_6m67h"]
+[ext_resource type="Script" path="res://addons/net.yarvis.pixel_pen/editor/editor_main_ui/layer_popup_menu.gd" id="29_6xlmu"]
+[ext_resource type="Texture2D" uid="uid://bldq3n1ujcpxu" path="res://addons/net.yarvis.pixel_pen/resources/icon/add_24.svg" id="30_1ngiw"]
+[ext_resource type="Texture2D" uid="uid://dhlo056qcyjky" path="res://addons/net.yarvis.pixel_pen/resources/icon/delete_24.svg" id="31_4d0km"]
+[ext_resource type="Script" path="res://addons/net.yarvis.pixel_pen/editor/editor_main_ui/layers.gd" id="32_cqc51"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g2g1g"]
+bg_color = Color(0.133, 0.133, 0.133, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_otkkb"]
+bg_color = Color(0.23, 0.23, 0.23, 1)
+
+[sub_resource type="Shader" id="Shader_wr15d"]
+code = "shader_type canvas_item;
+
+
+uniform vec3 tint : source_color;
+
+
+void fragment() {
+	COLOR.rgb = tint;
+}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_w3oj3"]
+resource_local_to_scene = true
+shader = SubResource("Shader_wr15d")
+shader_parameter/tint = Color(0.745098, 0.745098, 0.745098, 1)
+
+[sub_resource type="InputEventKey" id="InputEventKey_s4nss"]
+device = -1
+keycode = 65
+unicode = 65
+
+[sub_resource type="Shortcut" id="Shortcut_wqa1f"]
+events = [SubResource("InputEventKey_s4nss")]
+
+[sub_resource type="Shader" id="Shader_1u71b"]
+code = "shader_type canvas_item;
+
+
+uniform vec3 tint : source_color;
+
+
+void fragment() {
+	COLOR.rgb = tint;
+}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_lu0rw"]
+resource_local_to_scene = true
+shader = SubResource("Shader_1u71b")
+shader_parameter/tint = Color(0.745098, 0.745098, 0.745098, 1)
+
+[sub_resource type="InputEventKey" id="InputEventKey_luk10"]
+device = -1
+keycode = 77
+unicode = 109
+
+[sub_resource type="Shortcut" id="Shortcut_cqbyr"]
+events = [SubResource("InputEventKey_luk10")]
+
+[sub_resource type="Shader" id="Shader_j76yx"]
+code = "shader_type canvas_item;
+
+
+uniform vec3 tint : source_color;
+
+
+void fragment() {
+	COLOR.rgb = tint;
+}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0qdu1"]
+resource_local_to_scene = true
+shader = SubResource("Shader_j76yx")
+shader_parameter/tint = Color(0.745098, 0.745098, 0.745098, 1)
+
+[sub_resource type="InputEventKey" id="InputEventKey_7xtd1"]
+device = -1
+keycode = 72
+unicode = 104
+
+[sub_resource type="Shortcut" id="Shortcut_ultj0"]
+events = [SubResource("InputEventKey_7xtd1")]
+
+[sub_resource type="Shader" id="Shader_8p7ry"]
+code = "shader_type canvas_item;
+
+
+uniform vec3 tint : source_color;
+
+
+void fragment() {
+	COLOR.rgb = tint;
+}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0dlw2"]
+resource_local_to_scene = true
+shader = SubResource("Shader_8p7ry")
+shader_parameter/tint = Color(0.745098, 0.745098, 0.745098, 1)
+
+[sub_resource type="InputEventKey" id="InputEventKey_0x5ib"]
+device = -1
+keycode = 81
+unicode = 113
+
+[sub_resource type="Shortcut" id="Shortcut_uvc6r"]
+events = [SubResource("InputEventKey_0x5ib")]
+
+[sub_resource type="Shader" id="Shader_ju4k4"]
+code = "shader_type canvas_item;
+
+
+uniform vec3 tint : source_color;
+
+
+void fragment() {
+	COLOR.rgb = tint;
+}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hf0ku"]
+resource_local_to_scene = true
+shader = SubResource("Shader_ju4k4")
+shader_parameter/tint = Color(0.745098, 0.745098, 0.745098, 1)
+
+[sub_resource type="InputEventKey" id="InputEventKey_xxyjd"]
+device = -1
+keycode = 80
+unicode = 112
+
+[sub_resource type="Shortcut" id="Shortcut_ptn5s"]
+events = [SubResource("InputEventKey_xxyjd")]
+
+[sub_resource type="InputEventKey" id="InputEventKey_wurx1"]
+device = -1
+keycode = 66
+unicode = 98
+
+[sub_resource type="Shortcut" id="Shortcut_jk55n"]
+events = [SubResource("InputEventKey_wurx1")]
+
+[sub_resource type="Shader" id="Shader_vn61m"]
+code = "shader_type canvas_item;
+
+
+uniform vec3 tint : source_color;
+
+
+void fragment() {
+	COLOR.rgb = tint;
+}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tgi2h"]
+resource_local_to_scene = true
+shader = SubResource("Shader_vn61m")
+shader_parameter/tint = Color(0.745098, 0.745098, 0.745098, 1)
+
+[sub_resource type="InputEventKey" id="InputEventKey_fcskg"]
+device = -1
+keycode = 69
+unicode = 101
+
+[sub_resource type="Shortcut" id="Shortcut_sodjw"]
+events = [SubResource("InputEventKey_fcskg")]
+
+[sub_resource type="Shader" id="Shader_5j5fa"]
+code = "shader_type canvas_item;
+
+
+uniform vec3 tint : source_color;
+
+
+void fragment() {
+	COLOR.rgb = tint;
+}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xixoi"]
+resource_local_to_scene = true
+shader = SubResource("Shader_5j5fa")
+shader_parameter/tint = Color(0.745098, 0.745098, 0.745098, 1)
+
+[sub_resource type="InputEventKey" id="InputEventKey_fgqxq"]
+device = -1
+keycode = 76
+unicode = 108
+
+[sub_resource type="Shortcut" id="Shortcut_ccpih"]
+events = [SubResource("InputEventKey_fgqxq")]
+
+[sub_resource type="Shader" id="Shader_lb7mg"]
+code = "shader_type canvas_item;
+
+
+uniform vec3 tint : source_color;
+
+
+void fragment() {
+	COLOR.rgb = tint;
+}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xbb5q"]
+resource_local_to_scene = true
+shader = SubResource("Shader_lb7mg")
+shader_parameter/tint = Color(0.745098, 0.745098, 0.745098, 1)
+
+[sub_resource type="InputEventKey" id="InputEventKey_57r2u"]
+device = -1
+keycode = 83
+unicode = 115
+
+[sub_resource type="Shortcut" id="Shortcut_3g6ip"]
+events = [SubResource("InputEventKey_57r2u")]
+
+[sub_resource type="Shader" id="Shader_k1xl7"]
+code = "shader_type canvas_item;
+
+
+uniform vec3 tint : source_color;
+
+
+void fragment() {
+	COLOR.rgb = tint;
+}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ivnaf"]
+resource_local_to_scene = true
+shader = SubResource("Shader_k1xl7")
+shader_parameter/tint = Color(0.745098, 0.745098, 0.745098, 1)
+
+[sub_resource type="InputEventKey" id="InputEventKey_1hrbn"]
+device = -1
+keycode = 70
+unicode = 102
+
+[sub_resource type="Shortcut" id="Shortcut_dfndj"]
+events = [SubResource("InputEventKey_1hrbn")]
+
+[sub_resource type="Shader" id="Shader_p3r6c"]
+code = "shader_type canvas_item;
+
+
+uniform vec3 tint : source_color;
+
+
+void fragment() {
+	COLOR.rgb = tint;
+}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_lhs1s"]
+resource_local_to_scene = true
+shader = SubResource("Shader_p3r6c")
+shader_parameter/tint = Color(0.745098, 0.745098, 0.745098, 1)
+
+[sub_resource type="InputEventKey" id="InputEventKey_vd7ko"]
+device = -1
+keycode = 73
+unicode = 105
+
+[sub_resource type="Shortcut" id="Shortcut_6g5aw"]
+events = [SubResource("InputEventKey_vd7ko")]
+
+[sub_resource type="Shader" id="Shader_5whga"]
+code = "shader_type canvas_item;
+
+
+uniform vec3 tint : source_color;
+
+
+void fragment() {
+	COLOR.rgb = tint;
+}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_an8c1"]
+resource_local_to_scene = true
+shader = SubResource("Shader_5whga")
+shader_parameter/tint = Color(0.745098, 0.745098, 0.745098, 1)
+
+[sub_resource type="InputEventKey" id="InputEventKey_3hyo7"]
+device = -1
+keycode = 90
+unicode = 122
+
+[sub_resource type="Shortcut" id="Shortcut_c8e8j"]
+events = [SubResource("InputEventKey_3hyo7")]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fg7p6"]
+bg_color = Color(0.28, 0.28, 0.28, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_ei7lg"]
+font = ExtResource("18_uhe2p")
+font_size = 14
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_v7trb"]
+color = Color(0.211765, 0.239216, 0.290196, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_0is3d"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_i1mik"]
+outline_size = 2
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_aemu5"]
+shader = ExtResource("25_svm3h")
+shader_parameter/origin = null
+shader_parameter/tile_size = 8.0
+shader_parameter/lock_to_global = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8etc1"]
+shader = ExtResource("27_cc1ks")
+shader_parameter/tint = Color(0.745098, 0.745098, 0.745098, 1)
+
+[sub_resource type="Shader" id="Shader_l27li"]
+code = "shader_type canvas_item;
+
+
+uniform vec3 tint : source_color;
+
+
+void fragment() {
+	COLOR.rgb = tint;
+}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_sihf2"]
+resource_local_to_scene = true
+shader = SubResource("Shader_l27li")
+shader_parameter/tint = Color(0.745098, 0.745098, 0.745098, 1)
+
+[sub_resource type="Shader" id="Shader_mct3p"]
+code = "shader_type canvas_item;
+
+
+uniform vec3 tint : source_color;
+
+
+void fragment() {
+	COLOR.rgb = tint;
+}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6jgyp"]
+shader = SubResource("Shader_mct3p")
+shader_parameter/tint = Color(0.698039, 0.698039, 0.698039, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6tpih"]
+bg_color = Color(0.15, 0.15, 0.15, 1)
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_84xdt"]
+color = Color(0.25, 1, 0.5, 1)
+thickness = 2
+
+[node name="EditorMainUI" type="Control" node_paths=PackedStringArray("pixel_pen_menu", "file_menu", "edit_menu", "palette_menu", "view_menu", "canvas", "canvas_color", "debug_label", "preview_node")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_lcbg8")
+script = ExtResource("2_7n4p1")
+pixel_pen_menu = NodePath("Background/VBoxContainer/MainMenu/MarginContainer/HBoxContainer/PixelPen")
+file_menu = NodePath("Background/VBoxContainer/MainMenu/MarginContainer/HBoxContainer/File")
+edit_menu = NodePath("Background/VBoxContainer/MainMenu/MarginContainer/HBoxContainer/Edit")
+palette_menu = NodePath("Background/VBoxContainer/MainMenu/MarginContainer/HBoxContainer/Palette")
+view_menu = NodePath("Background/VBoxContainer/MainMenu/MarginContainer/HBoxContainer/View")
+canvas = NodePath("Background/VBoxContainer/MarginContainer/HBoxContainer/Canvas/VBoxContainer/CanvasColor/SubViewportContainer/SubViewport/EditorCanvas")
+canvas_color = NodePath("Background/VBoxContainer/MarginContainer/HBoxContainer/Canvas/VBoxContainer/CanvasColor")
+canvas_color_base = Color(0.38, 0.38, 0.38, 1)
+canvas_color_sample = Color(0.18, 0.18, 0.3, 1)
+debug_label = NodePath("Background/VBoxContainer/MarginContainer/HBoxContainer/Canvas/VBoxContainer/CanvasColor/DebugLabel")
+preview_node = NodePath("Background/VBoxContainer/MarginContainer/HBoxContainer/Inspector/Preview")
+
+[node name="ThemeConfig" type="Node" parent="." node_paths=PackedStringArray("editor_main_ui", "main_panel", "main_menu", "toolbox_panel", "palette_panel", "palette_title_panel", "subtool_panel", "preview_panel", "preview_wrapper_panel", "preview_title_panel", "layer_panel", "layers_wrapper_panel", "layer_title_panel")]
+script = ExtResource("2_qv6xe")
+editor_main_ui = NodePath("..")
+main_panel = NodePath("../Background")
+main_menu = NodePath("../Background/VBoxContainer/MainMenu")
+toolbox_panel = NodePath("../Background/VBoxContainer/MarginContainer/HBoxContainer/ToolBox")
+palette_panel = NodePath("../Background/VBoxContainer/MarginContainer/HBoxContainer/Palette")
+palette_title_panel = NodePath("../Background/VBoxContainer/MarginContainer/HBoxContainer/Palette/VBoxContainer/Panel")
+subtool_panel = NodePath("../Background/VBoxContainer/MarginContainer/HBoxContainer/Canvas/VBoxContainer/SubTool")
+preview_panel = NodePath("../Background/VBoxContainer/MarginContainer/HBoxContainer/Inspector/Preview")
+preview_wrapper_panel = NodePath("../Background/VBoxContainer/MarginContainer/HBoxContainer/Inspector/Preview/VBoxContainer/Background")
+preview_title_panel = NodePath("../Background/VBoxContainer/MarginContainer/HBoxContainer/Inspector/Preview/VBoxContainer/Panel")
+layer_panel = NodePath("../Background/VBoxContainer/MarginContainer/HBoxContainer/Inspector/LayerPanel")
+layers_wrapper_panel = NodePath("../Background/VBoxContainer/MarginContainer/HBoxContainer/Inspector/LayerPanel/VBoxContainer/Layers")
+layer_title_panel = NodePath("../Background/VBoxContainer/MarginContainer/HBoxContainer/Inspector/LayerPanel/VBoxContainer/LayerTitle")
+
+[node name="Background" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_g2g1g")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Background"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 2
+
+[node name="MainMenu" type="Panel" parent="Background/VBoxContainer"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_otkkb")
+
+[node name="MarginContainer" type="MarginContainer" parent="Background/VBoxContainer/MainMenu"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Background/VBoxContainer/MainMenu/MarginContainer"]
+custom_minimum_size = Vector2(70, 0)
+layout_mode = 2
+
+[node name="PixelPen" type="MenuButton" parent="Background/VBoxContainer/MainMenu/MarginContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_h0rgc")
+theme_override_font_sizes/font_size = 14
+text = "PixelPen"
+switch_on_hover = true
+
+[node name="File" type="MenuButton" parent="Background/VBoxContainer/MainMenu/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.05
+theme_override_fonts/font = ExtResource("3_h0rgc")
+theme_override_font_sizes/font_size = 14
+text = "File"
+switch_on_hover = true
+
+[node name="Edit" type="MenuButton" parent="Background/VBoxContainer/MainMenu/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.05
+theme_override_fonts/font = ExtResource("3_h0rgc")
+theme_override_font_sizes/font_size = 14
+text = "Edit"
+switch_on_hover = true
+
+[node name="Palette" type="MenuButton" parent="Background/VBoxContainer/MainMenu/MarginContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_h0rgc")
+theme_override_font_sizes/font_size = 14
+disabled = true
+text = "Palette"
+switch_on_hover = true
+
+[node name="View" type="MenuButton" parent="Background/VBoxContainer/MainMenu/MarginContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_h0rgc")
+theme_override_font_sizes/font_size = 14
+text = "View"
+switch_on_hover = true
+
+[node name="MarginContainer" type="MarginContainer" parent="Background/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 2
+theme_override_constants/margin_right = 2
+theme_override_constants/margin_bottom = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Background/VBoxContainer/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 2
+
+[node name="ToolBox" type="Panel" parent="Background/VBoxContainer/MarginContainer/HBoxContainer" node_paths=PackedStringArray("select", "move", "pan", "selection", "pen", "brush", "eraser", "line", "rectangle", "fill", "color_picker", "zoom")]
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_otkkb")
+script = ExtResource("4_217wj")
+select = NodePath("VBoxContainer/Select")
+move = NodePath("VBoxContainer/Move")
+pan = NodePath("VBoxContainer/Pan")
+selection = NodePath("VBoxContainer/Selection")
+pen = NodePath("VBoxContainer/Pen")
+brush = NodePath("VBoxContainer/Brush")
+eraser = NodePath("VBoxContainer/Eraser")
+line = NodePath("VBoxContainer/Line")
+rectangle = NodePath("VBoxContainer/Rectangle")
+fill = NodePath("VBoxContainer/Fill")
+color_picker = NodePath("VBoxContainer/ColorPicker")
+zoom = NodePath("VBoxContainer/Zoom")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Background/VBoxContainer/MarginContainer/HBoxContainer/ToolBox"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Select" type="TextureButton" parent="Background/VBoxContainer/MarginContainer/HBoxContainer/ToolBox/VBoxContainer"]
+material = SubResource("ShaderMaterial_w3oj3")
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+focus_mode = 0
+shortcut = SubResource("Shortcut_wqa1f")
+texture_normal = ExtResource("5_ru4it")
+texture_pressed = ExtResource("5_ru4it")
+texture_hover = ExtResource("5_ru4it")
+stretch_mode = 3
+
+[node name="Hover" type="Node" parent="Background/VBoxContainer/MarginContainer/HBoxContainer/ToolBox/VBoxContainer/Select"]
+script = ExtResource("6_fnv4p")
+tool_grup = 0
+tool_type = 0
+
+[node name="Move" type="TextureButton" parent="Background/VBoxContainer/MarginContainer/HBoxContainer/ToolBox/VBoxContainer"]
+material = SubResource("ShaderMaterial_lu0rw")
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+focus_mode = 0
+shortcut = SubResource("Shortcut_cqbyr")
+texture_normal = ExtResource("7_au01e")
+texture_pressed = ExtResource("7_au01e")
+texture_hover = ExtResource("7_au01e")
+stretch_mode = 3
+
+[node name="Hover" type="Node" parent="Background/VBoxContainer/MarginContainer/HBoxContainer/ToolBox/VBoxContainer/Move"]
+script = ExtResource("6_fnv4p")
+tool_grup = 0
+tool_type = 1
+
+[node name="Pan" type="TextureButton" parent="Background/VBoxContainer/MarginContainer/HBoxContainer/ToolBox/VBoxContainer"]
+material = SubResource("ShaderMaterial_0qdu1")
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+focus_mode = 0
+shortcut = SubResource("Shortcut_ultj0")
+texture_normal = ExtResource("8_x53ql")
+texture_pressed = ExtResource("8_x53ql")
+texture_hover = ExtResource("8_x53ql")
+stretch_mode = 3
+
+[node name="Hover" type="Node" parent="Background/VBoxContainer/MarginContainer/HBoxContainer/ToolBox/VBoxContainer/Pan"]
+script = ExtResource("6_fnv4p")
+tool_grup = 0
+tool_type = 2
+
+[node name="Selection" type="TextureButton" parent="Background/VBoxContainer/MarginContainer/HBoxContainer/ToolBox/VBoxContainer"]
+material = SubResource("ShaderMaterial_0dlw2")
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+focus_mode = 0
+shortcut = SubResource("Shortcut_uvc6r")
+texture_normal = ExtResource("9_t4a5x")
+texture_pressed = ExtResource("9_t4a5x")
+texture_hover = ExtResource("9_t4a5x")
+stretch_mode = 3
+
+[node name="Hover" type="Node" parent="Background/VBoxContainer/MarginContainer/HBoxContainer/ToolBox/VBoxContainer/Selection"]
+script = ExtResource("6_fnv4p")
+tool_grup = 0
+tool_type = 3
+
+[node name="Pen" type="TextureButton" parent="Background/VBoxContainer/MarginContainer/HBoxContainer/ToolBox/VBoxContainer"]
+material = SubResource("ShaderMaterial_hf0ku")
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+focus_mode = 0
+shortcut = SubResource("Shortcut_ptn5s")
+texture_normal = ExtResource("10_lmurd")
+texture_pressed = ExtResource("10_lmurd")
+texture_hover = ExtResource("10_lmurd")
+stretch_mode = 3
+
+[node name="Hover" type="Node" parent="Background/VBoxContainer/MarginContainer/HBoxContainer/ToolBox/VBoxContainer/Pen"]
+script = ExtResource("6_fnv4p")
+tool_grup = 0
+tool_type = 4
+
+[node name="Brush" type="TextureButton" parent="Background/VBoxContainer/MarginContainer/HBoxContainer/ToolBox/VBoxContainer"]
+material = SubResource("ShaderMaterial_hf0ku")
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+focus_mode = 0
+shortcut = SubResource("Shortcut_jk55n")
+texture_normal = ExtResource("11_xv570")
+texture_pressed = ExtResource("11_xv570")
+texture_hover = ExtResource("11_xv570")
+stretch_mode = 3
+
+[node name="Hover" type="Node" parent="Background/VBoxContainer/MarginContainer/HBoxContainer/ToolBox/VBoxContainer/Brush"]
+script = ExtResource("6_fnv4p")
+tool_grup = 0
+tool_type = 5
+
+[node name="Eraser" type="TextureButton" parent="Background/VBoxContainer/MarginContainer/HBoxContainer/ToolBox/VBoxContainer"]
+material = SubResource("ShaderMaterial_tgi2h")
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+focus_mode = 0
+shortcut = SubResource("Shortcut_sodjw")
+texture_normal = ExtResource("12_c8maa")
+texture_pressed = ExtResource("12_c8maa")
+texture_hover = ExtResource("12_c8maa")
+stretch_mode = 3
+
+[node name="Hover" type="Node" parent="Background/VBoxContainer/MarginContainer/HBoxContainer/ToolBox/VBoxContainer/Eraser"]
+script = ExtResource("6_fnv4p")
+tool_grup = 0
+tool_type = 6
+
+[node name="Line" type="TextureButton" parent="Background/VBoxContainer/MarginContainer/HBoxContainer/ToolBox/VBoxContainer"]
+material = SubResource("ShaderMaterial_xixoi")
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+focus_mode = 0
+shortcut = SubResource("Shortcut_ccpih")
+texture_normal = ExtResource("13_wlioy")
+texture_pressed = ExtResource("13_wlioy")
+texture_hover = ExtResource("13_wlioy")
+stretch_mode = 3
+
+[node name="Hover" type="Node" parent="Background/VBoxContainer/MarginContainer/HBoxContainer/ToolBox/VBoxContainer/Line"]
+script = ExtResource("6_fnv4p")
+tool_grup = 0
+tool_type = 7
+
+[node name="Rectangle" type="TextureButton" parent="Background/VBoxContainer/MarginContainer/HBoxContainer/ToolBox/VBoxContainer"]
+material = SubResource("ShaderMaterial_xbb5q")
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+focus_mode = 0
+shortcut = SubResource("Shortcut_3g6ip")
+texture_normal = ExtResource("14_pwm65")
+texture_pressed = ExtResource("14_pwm65")
+texture_hover = ExtResource("14_pwm65")
+stretch_mode = 3
+
+[node name="Hover" type="Node" parent="Background/VBoxContainer/MarginContainer/HBoxContainer/ToolBox/VBoxContainer/Rectangle"]
+script = ExtResource("6_fnv4p")
+tool_grup = 0
+tool_type = 8
+
+[node name="Fill" type="TextureButton" parent="Background/VBoxContainer/MarginContainer/HBoxContainer/ToolBox/VBoxContainer"]
+material = SubResource("ShaderMaterial_ivnaf")
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+focus_mode = 0
+shortcut = SubResource("Shortcut_dfndj")
+texture_normal = ExtResource("15_jfpjv")
+texture_pressed = ExtResource("15_jfpjv")
+texture_hover = ExtResource("15_jfpjv")
+stretch_mode = 3
+
+[node name="Hover" type="Node" parent="Background/VBoxContainer/MarginContainer/HBoxContainer/ToolBox/VBoxContainer/Fill"]
+script = ExtResource("6_fnv4p")
+tool_grup = 0
+tool_type = 9
+
+[node name="ColorPicker" type="TextureButton" parent="Background/VBoxContainer/MarginContainer/HBoxContainer/ToolBox/VBoxContainer"]
+material = SubResource("ShaderMaterial_lhs1s")
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+focus_mode = 0
+shortcut = SubResource("Shortcut_6g5aw")
+texture_normal = ExtResource("16_4ibb0")
+texture_pressed = ExtResource("16_4ibb0")
+texture_hover = ExtResource("16_4ibb0")
+stretch_mode = 3
+
+[node name="Hover" type="Node" parent="Background/VBoxContainer/MarginContainer/HBoxContainer/ToolBox/VBoxContainer/ColorPicker"]
+script = ExtResource("6_fnv4p")
+tool_grup = 0
+tool_type = 10
+
+[node name="Zoom" type="TextureButton" parent="Background/VBoxContainer/MarginContainer/HBoxContainer/ToolBox/VBoxContainer"]
+material = SubResource("ShaderMaterial_an8c1")
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+focus_mode = 0
+shortcut = SubResource("Shortcut_c8e8j")
+texture_normal = ExtResource("17_rjgfy")
+texture_pressed = ExtResource("17_rjgfy")
+texture_hover = ExtResource("17_rjgfy")
+stretch_mode = 3
+
+[node name="Hover" type="Node" parent="Background/VBoxContainer/MarginContainer/HBoxContainer/ToolBox/VBoxContainer/Zoom"]
+script = ExtResource("6_fnv4p")
+tool_grup = 0
+tool_type = 11
+
+[node name="Palette" type="Panel" parent="Background/VBoxContainer/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(256, 0)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_otkkb")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Background/VBoxContainer/MarginContainer/HBoxContainer/Palette"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 8
+
+[node name="Panel" type="Panel" parent="Background/VBoxContainer/MarginContainer/HBoxContainer/Palette/VBoxContainer"]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_fg7p6")
+
+[node name="Label" type="Label" parent="Background/VBoxContainer/MarginContainer/HBoxContainer/Palette/VBoxContainer/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Palette
+"
+label_settings = SubResource("LabelSettings_ei7lg")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Palette" type="MarginContainer" parent="Background/VBoxContainer/MarginContainer/HBoxContainer/Palette/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.3
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Background/VBoxContainer/MarginContainer/HBoxContainer/Palette/VBoxContainer/Palette"]
+layout_mode = 2
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 2
+
+[node name="Grid" type="Control" parent="Background/VBoxContainer/MarginContainer/HBoxContainer/Palette/VBoxContainer/Palette/ScrollContainer" node_paths=PackedStringArray("color_picker")]
+custom_minimum_size = Vector2(0, 624)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+tooltip_text = "(LMB)
+Pick active color palette.
+
+(RMB)
+Switch active color palette to given grid position.
+
+(SHIFT+LMB)
+Change image color if the color being used is the current active color palette to given color palette.
+
+(SHIFT+RMB)
+Change given palette color to opaque."
+script = ExtResource("19_eprkn")
+color_picker = NodePath("../../../Picker/ScrollContainer/ColorPicker")
+
+[node name="HSeparator" type="HSeparator" parent="Background/VBoxContainer/MarginContainer/HBoxContainer/Palette/VBoxContainer"]
+custom_minimum_size = Vector2(244, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 1
+theme_override_styles/separator = SubResource("StyleBoxLine_v7trb")
+
+[node name="Picker" type="MarginContainer" parent="Background/VBoxContainer/MarginContainer/HBoxContainer/Palette/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.7
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Background/VBoxContainer/MarginContainer/HBoxContainer/Palette/VBoxContainer/Picker"]
+layout_mode = 2
+
+[node name="ColorPicker" type="ColorPicker" parent="Background/VBoxContainer/MarginContainer/HBoxContainer/Palette/VBoxContainer/Picker/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/sv_width = 0
+theme_override_constants/sv_height = 200
+color = Color(0, 0, 0, 1)
+color_mode = 1
+picker_shape = 1
+can_add_swatches = false
+sampler_visible = false
+presets_visible = false
+
+[node name="Canvas" type="Control" parent="Background/VBoxContainer/MarginContainer/HBoxContainer"]
+clip_contents = true
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Background/VBoxContainer/MarginContainer/HBoxContainer/Canvas"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SubTool" type="Panel" parent="Background/VBoxContainer/MarginContainer/HBoxContainer/Canvas/VBoxContainer" node_paths=PackedStringArray("button_list", "shift_separator", "shift_label", "canvas")]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_otkkb")
+script = ExtResource("20_sif0e")
+button_list = NodePath("MarginContainer/HBoxContainer/ButtonList")
+shift_separator = NodePath("MarginContainer/HBoxContainer/VSeparator")
+shift_label = NodePath("MarginContainer/HBoxContainer/MarginContainer/ShiftMode")
+canvas = NodePath("../CanvasColor/SubViewportContainer/SubViewport/EditorCanvas")
+
+[node name="MarginContainer" type="MarginContainer" parent="Background/VBoxContainer/MarginContainer/HBoxContainer/Canvas/VBoxContainer/SubTool"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_right = 8
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Background/VBoxContainer/MarginContainer/HBoxContainer/Canvas/VBoxContainer/SubTool/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="ButtonList" type="HBoxContainer" parent="Background/VBoxContainer/MarginContainer/HBoxContainer/Canvas/VBoxContainer/SubTool/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="VSeparator" type="VSeparator" parent="Background/VBoxContainer/MarginContainer/HBoxContainer/Canvas/VBoxContainer/SubTool/MarginContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Background/VBoxContainer/MarginContainer/HBoxContainer/Canvas/VBoxContainer/SubTool/MarginContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+
+[node name="ShiftMode" type="Label" parent="Background/VBoxContainer/MarginContainer/HBoxContainer/Canvas/VBoxContainer/SubTool/MarginContainer/HBoxContainer/MarginContainer"]
+modulate = Color(1, 1, 1, 0.5)
+layout_mode = 2
+size_flags_vertical = 1
+tooltip_text = "(SHIFT)
+When holding SHIFT key and mouse inside canvas viewport it will enable secondary sub tool.
+"
+mouse_filter = 1
+text = "SHIFT"
+label_settings = SubResource("LabelSettings_0is3d")
+vertical_alignment = 1
+
+[node name="CanvasColor" type="ColorRect" parent="Background/VBoxContainer/MarginContainer/HBoxContainer/Canvas/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 1
+color = Color(0.298039, 0.298039, 0.298039, 1)
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="Background/VBoxContainer/MarginContainer/HBoxContainer/Canvas/VBoxContainer/CanvasColor" node_paths=PackedStringArray("editor_canvas")]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
+stretch = true
+script = ExtResource("21_vnetw")
+editor_canvas = NodePath("SubViewport/EditorCanvas")
+
+[node name="SubViewport" type="SubViewport" parent="Background/VBoxContainer/MarginContainer/HBoxContainer/Canvas/VBoxContainer/CanvasColor/SubViewportContainer"]
+transparent_bg = true
+handle_input_locally = false
+snap_2d_transforms_to_pixel = true
+size = Vector2i(718, 633)
+render_target_update_mode = 4
+
+[node name="EditorCanvas" parent="Background/VBoxContainer/MarginContainer/HBoxContainer/Canvas/VBoxContainer/CanvasColor/SubViewportContainer/SubViewport" instance=ExtResource("22_fuimd")]
+
+[node name="DebugLabel" type="Label" parent="Background/VBoxContainer/MarginContainer/HBoxContainer/Canvas/VBoxContainer/CanvasColor" groups=["debug_label"]]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 1
+label_settings = SubResource("LabelSettings_i1mik")
+vertical_alignment = 2
+autowrap_mode = 2
+script = ExtResource("23_lv0tc")
+
+[node name="Inspector" type="VBoxContainer" parent="Background/VBoxContainer/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(256, 0)
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Preview" type="Panel" parent="Background/VBoxContainer/MarginContainer/HBoxContainer/Inspector"]
+visible = false
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.3
+theme_override_styles/panel = SubResource("StyleBoxFlat_otkkb")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Background/VBoxContainer/MarginContainer/HBoxContainer/Inspector/Preview"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="Background/VBoxContainer/MarginContainer/HBoxContainer/Inspector/Preview/VBoxContainer"]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_fg7p6")
+
+[node name="Label" type="Label" parent="Background/VBoxContainer/MarginContainer/HBoxContainer/Inspector/Preview/VBoxContainer/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Preview
+"
+label_settings = SubResource("LabelSettings_ei7lg")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Background" type="ColorRect" parent="Background/VBoxContainer/MarginContainer/HBoxContainer/Inspector/Preview/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+color = Color(0.15, 0.15, 0.15, 1)
+
+[node name="AspectRatioContainer" type="AspectRatioContainer" parent="Background/VBoxContainer/MarginContainer/HBoxContainer/Inspector/Preview/VBoxContainer/Background" node_paths=PackedStringArray("label", "editor_canvas", "texture_rect", "preview_container", "canvas")]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("24_i8hkg")
+label = NodePath("../../Panel/Label")
+editor_canvas = NodePath("../../../../../Canvas/VBoxContainer/CanvasColor/SubViewportContainer/SubViewport/EditorCanvas")
+texture_rect = NodePath("ColorRect/TextureRect")
+preview_container = NodePath("../../..")
+canvas = NodePath("../../../../../Canvas/VBoxContainer/CanvasColor/SubViewportContainer/SubViewport/EditorCanvas")
+
+[node name="ColorRect" type="ColorRect" parent="Background/VBoxContainer/MarginContainer/HBoxContainer/Inspector/Preview/VBoxContainer/Background/AspectRatioContainer"]
+material = SubResource("ShaderMaterial_aemu5")
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="Background/VBoxContainer/MarginContainer/HBoxContainer/Inspector/Preview/VBoxContainer/Background/AspectRatioContainer/ColorRect"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+expand_mode = 1
+
+[node name="LayerPanel" type="Panel" parent="Background/VBoxContainer/MarginContainer/HBoxContainer/Inspector"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.6
+theme_override_styles/panel = SubResource("StyleBoxFlat_otkkb")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Background/VBoxContainer/MarginContainer/HBoxContainer/Inspector/LayerPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 0
+
+[node name="LayerTitle" type="Panel" parent="Background/VBoxContainer/MarginContainer/HBoxContainer/Inspector/LayerPanel/VBoxContainer"]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_fg7p6")
+
+[node name="Label" type="Label" parent="Background/VBoxContainer/MarginContainer/HBoxContainer/Inspector/LayerPanel/VBoxContainer/LayerTitle"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Layers"
+label_settings = SubResource("LabelSettings_ei7lg")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="LayersTools" type="HBoxContainer" parent="Background/VBoxContainer/MarginContainer/HBoxContainer/Inspector/LayerPanel/VBoxContainer" node_paths=PackedStringArray("popup_menu", "canvas_node", "add_layer", "delete_layer")]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+alignment = 2
+script = ExtResource("26_rb4wp")
+popup_menu = NodePath("LayerMenu/LayerPopupMenu")
+canvas_node = NodePath("../../../../Canvas/VBoxContainer/CanvasColor/SubViewportContainer/SubViewport/EditorCanvas")
+add_layer = NodePath("AddLayer")
+delete_layer = NodePath("DeleteLayer")
+
+[node name="LayerMenu" type="TextureButton" parent="Background/VBoxContainer/MarginContainer/HBoxContainer/Inspector/LayerPanel/VBoxContainer/LayersTools"]
+material = SubResource("ShaderMaterial_8etc1")
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+texture_normal = ExtResource("28_6m67h")
+texture_pressed = ExtResource("28_6m67h")
+texture_hover = ExtResource("28_6m67h")
+stretch_mode = 3
+
+[node name="Hover" type="Node" parent="Background/VBoxContainer/MarginContainer/HBoxContainer/Inspector/LayerPanel/VBoxContainer/LayersTools/LayerMenu"]
+script = ExtResource("6_fnv4p")
+tool_grup = 2
+
+[node name="LayerPopupMenu" type="PopupMenu" parent="Background/VBoxContainer/MarginContainer/HBoxContainer/Inspector/LayerPanel/VBoxContainer/LayersTools/LayerMenu" node_paths=PackedStringArray("layers_tool", "canvas_node")]
+size = Vector2i(277, 521)
+item_count = 21
+item_0/text = "Add layer..."
+item_0/id = 0
+item_1/text = "Delete layer"
+item_1/id = 1
+item_2/text = ""
+item_2/id = -1
+item_2/separator = true
+item_3/text = "Duplicate layer"
+item_3/id = 2
+item_4/text = "Copy layer"
+item_4/id = 3
+item_5/text = "Cut layer"
+item_5/id = 4
+item_6/text = ""
+item_6/id = -1
+item_6/separator = true
+item_7/text = "Duplicate selection"
+item_7/id = 5
+item_8/text = ""
+item_8/id = -1
+item_8/separator = true
+item_9/text = "Paste to new layer"
+item_9/id = 8
+item_10/text = ""
+item_10/id = -1
+item_10/separator = true
+item_11/text = "Rename layer..."
+item_11/id = 9
+item_12/text = ""
+item_12/id = -1
+item_12/separator = true
+item_13/text = "Merge down"
+item_13/id = 10
+item_14/text = "Merge visible"
+item_14/id = 11
+item_15/text = "Merge all"
+item_15/id = 12
+item_16/text = ""
+item_16/id = -1
+item_16/separator = true
+item_17/text = "Show all layers"
+item_17/id = 13
+item_18/text = "Hide all layers"
+item_18/id = 14
+item_19/text = ""
+item_19/id = -1
+item_19/separator = true
+item_20/text = "Apply previous move transform"
+item_20/id = 15
+script = ExtResource("29_6xlmu")
+layers_tool = NodePath("../..")
+canvas_node = NodePath("../../../../../../Canvas/VBoxContainer/CanvasColor/SubViewportContainer/SubViewport/EditorCanvas")
+
+[node name="SpaceExpand" type="Control" parent="Background/VBoxContainer/MarginContainer/HBoxContainer/Inspector/LayerPanel/VBoxContainer/LayersTools"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="AddLayer" type="TextureButton" parent="Background/VBoxContainer/MarginContainer/HBoxContainer/Inspector/LayerPanel/VBoxContainer/LayersTools"]
+material = SubResource("ShaderMaterial_sihf2")
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+focus_mode = 0
+texture_normal = ExtResource("30_1ngiw")
+texture_pressed = ExtResource("30_1ngiw")
+texture_hover = ExtResource("30_1ngiw")
+stretch_mode = 3
+
+[node name="Hover" type="Node" parent="Background/VBoxContainer/MarginContainer/HBoxContainer/Inspector/LayerPanel/VBoxContainer/LayersTools/AddLayer"]
+script = ExtResource("6_fnv4p")
+tool_grup = 2
+
+[node name="DeleteLayer" type="TextureButton" parent="Background/VBoxContainer/MarginContainer/HBoxContainer/Inspector/LayerPanel/VBoxContainer/LayersTools"]
+material = SubResource("ShaderMaterial_6jgyp")
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+focus_mode = 0
+texture_normal = ExtResource("31_4d0km")
+texture_pressed = ExtResource("31_4d0km")
+texture_hover = ExtResource("31_4d0km")
+stretch_mode = 3
+
+[node name="Hover" type="Node" parent="Background/VBoxContainer/MarginContainer/HBoxContainer/Inspector/LayerPanel/VBoxContainer/LayersTools/DeleteLayer"]
+script = ExtResource("6_fnv4p")
+tool_grup = 2
+
+[node name="Layers" type="Panel" parent="Background/VBoxContainer/MarginContainer/HBoxContainer/Inspector/LayerPanel/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_6tpih")
+
+[node name="MarginContainer" type="MarginContainer" parent="Background/VBoxContainer/MarginContainer/HBoxContainer/Inspector/LayerPanel/VBoxContainer/Layers"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Background/VBoxContainer/MarginContainer/HBoxContainer/Inspector/LayerPanel/VBoxContainer/Layers/MarginContainer"]
+layout_mode = 2
+horizontal_scroll_mode = 0
+
+[node name="Layers" type="VBoxContainer" parent="Background/VBoxContainer/MarginContainer/HBoxContainer/Inspector/LayerPanel/VBoxContainer/Layers/MarginContainer/ScrollContainer" node_paths=PackedStringArray("separator_hint")]
+custom_minimum_size = Vector2(0, 80)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 2
+script = ExtResource("32_cqc51")
+separator_hint = NodePath("SeparatorHint")
+
+[node name="SeparatorHint" type="HSeparator" parent="Background/VBoxContainer/MarginContainer/HBoxContainer/Inspector/LayerPanel/VBoxContainer/Layers/MarginContainer/ScrollContainer/Layers"]
+layout_mode = 2
+theme_override_constants/separation = 2
+theme_override_styles/separator = SubResource("StyleBoxLine_84xdt")
+
+[connection signal="pressed" from="Background/VBoxContainer/MarginContainer/HBoxContainer/ToolBox/VBoxContainer/Select" to="Background/VBoxContainer/MarginContainer/HBoxContainer/ToolBox" method="_on_select_pressed"]
+[connection signal="pressed" from="Background/VBoxContainer/MarginContainer/HBoxContainer/ToolBox/VBoxContainer/Move" to="Background/VBoxContainer/MarginContainer/HBoxContainer/ToolBox" method="_on_move_pressed"]
+[connection signal="pressed" from="Background/VBoxContainer/MarginContainer/HBoxContainer/ToolBox/VBoxContainer/Pan" to="Background/VBoxContainer/MarginContainer/HBoxContainer/ToolBox" method="_on_pan_pressed"]
+[connection signal="pressed" from="Background/VBoxContainer/MarginContainer/HBoxContainer/ToolBox/VBoxContainer/Selection" to="Background/VBoxContainer/MarginContainer/HBoxContainer/ToolBox" method="_on_selection_pressed"]
+[connection signal="pressed" from="Background/VBoxContainer/MarginContainer/HBoxContainer/ToolBox/VBoxContainer/Pen" to="Background/VBoxContainer/MarginContainer/HBoxContainer/ToolBox" method="_on_pen_pressed"]
+[connection signal="pressed" from="Background/VBoxContainer/MarginContainer/HBoxContainer/ToolBox/VBoxContainer/Brush" to="Background/VBoxContainer/MarginContainer/HBoxContainer/ToolBox" method="_on_brush_pressed"]
+[connection signal="pressed" from="Background/VBoxContainer/MarginContainer/HBoxContainer/ToolBox/VBoxContainer/Eraser" to="Background/VBoxContainer/MarginContainer/HBoxContainer/ToolBox" method="_on_eraser_pressed"]
+[connection signal="pressed" from="Background/VBoxContainer/MarginContainer/HBoxContainer/ToolBox/VBoxContainer/Line" to="Background/VBoxContainer/MarginContainer/HBoxContainer/ToolBox" method="_on_line_pressed"]
+[connection signal="pressed" from="Background/VBoxContainer/MarginContainer/HBoxContainer/ToolBox/VBoxContainer/Rectangle" to="Background/VBoxContainer/MarginContainer/HBoxContainer/ToolBox" method="_on_rectangle_pressed"]
+[connection signal="pressed" from="Background/VBoxContainer/MarginContainer/HBoxContainer/ToolBox/VBoxContainer/Fill" to="Background/VBoxContainer/MarginContainer/HBoxContainer/ToolBox" method="_on_fill_pressed"]
+[connection signal="pressed" from="Background/VBoxContainer/MarginContainer/HBoxContainer/ToolBox/VBoxContainer/ColorPicker" to="Background/VBoxContainer/MarginContainer/HBoxContainer/ToolBox" method="_on_color_picker_pressed"]
+[connection signal="pressed" from="Background/VBoxContainer/MarginContainer/HBoxContainer/ToolBox/VBoxContainer/Zoom" to="Background/VBoxContainer/MarginContainer/HBoxContainer/ToolBox" method="_on_zoom_pressed"]
+[connection signal="color_changed" from="Background/VBoxContainer/MarginContainer/HBoxContainer/Palette/VBoxContainer/Picker/ScrollContainer/ColorPicker" to="Background/VBoxContainer/MarginContainer/HBoxContainer/Palette/VBoxContainer/Palette/ScrollContainer/Grid" method="_on_color_picker_color_changed"]
+[connection signal="mouse_entered" from="Background/VBoxContainer/MarginContainer/HBoxContainer/Canvas/VBoxContainer/CanvasColor/SubViewportContainer" to="Background/VBoxContainer/MarginContainer/HBoxContainer/Canvas/VBoxContainer/CanvasColor/SubViewportContainer" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Background/VBoxContainer/MarginContainer/HBoxContainer/Canvas/VBoxContainer/CanvasColor/SubViewportContainer" to="Background/VBoxContainer/MarginContainer/HBoxContainer/Canvas/VBoxContainer/CanvasColor/SubViewportContainer" method="_on_mouse_exited"]
+[connection signal="pressed" from="Background/VBoxContainer/MarginContainer/HBoxContainer/Inspector/LayerPanel/VBoxContainer/LayersTools/LayerMenu" to="Background/VBoxContainer/MarginContainer/HBoxContainer/Inspector/LayerPanel/VBoxContainer/LayersTools" method="_on_menu_pressed"]
+[connection signal="id_pressed" from="Background/VBoxContainer/MarginContainer/HBoxContainer/Inspector/LayerPanel/VBoxContainer/LayersTools/LayerMenu/LayerPopupMenu" to="Background/VBoxContainer/MarginContainer/HBoxContainer/Inspector/LayerPanel/VBoxContainer/LayersTools/LayerMenu/LayerPopupMenu" method="_on_id_pressed"]
+[connection signal="pressed" from="Background/VBoxContainer/MarginContainer/HBoxContainer/Inspector/LayerPanel/VBoxContainer/LayersTools/AddLayer" to="Background/VBoxContainer/MarginContainer/HBoxContainer/Inspector/LayerPanel/VBoxContainer/LayersTools" method="_on_add_pressed"]
+[connection signal="pressed" from="Background/VBoxContainer/MarginContainer/HBoxContainer/Inspector/LayerPanel/VBoxContainer/LayersTools/DeleteLayer" to="Background/VBoxContainer/MarginContainer/HBoxContainer/Inspector/LayerPanel/VBoxContainer/LayersTools" method="_on_trash_pressed"]

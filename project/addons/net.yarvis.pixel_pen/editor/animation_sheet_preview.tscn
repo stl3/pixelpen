@@ -1,0 +1,233 @@
+[gd_scene load_steps=8 format=3 uid="uid://k85pfq6cmvcw"]
+
+[ext_resource type="Script" path="res://addons/net.yarvis.pixel_pen/editor/animation_preview/animation_sheet_preview.gd" id="1_f64kq"]
+[ext_resource type="Theme" uid="uid://bsuqu64445rmf" path="res://addons/net.yarvis.pixel_pen/resources/default_theme.tres" id="1_wirsx"]
+[ext_resource type="Shader" path="res://addons/net.yarvis.pixel_pen/resources/editor_canvas.gdshader" id="2_ndwi5"]
+[ext_resource type="Script" path="res://addons/net.yarvis.pixel_pen/editor/animation_preview/texture_rect.gd" id="3_3pqxv"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4rl4s"]
+shader = ExtResource("2_ndwi5")
+shader_parameter/origin = Vector2(16, 17.5)
+shader_parameter/tile_size = 18.0
+shader_parameter/lock_to_global = 1.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3berc"]
+bg_color = Color(0.239216, 0.239216, 0.239216, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_c13d5"]
+bg_color = Color(0.145098, 0.156863, 0.176471, 1)
+
+[node name="AnimationSheetPreview" type="Window" node_paths=PackedStringArray("node", "aspect_ratio", "shader_node", "prop_box", "animation_id_menu", "fps_spinner", "grid_size_x", "grid_size_y", "region_position_x", "region_position_y", "region_size_x", "region_size_y")]
+canvas_item_default_texture_filter = 0
+title = "Animation Sheet Preview"
+position = Vector2i(0, 21)
+size = Vector2i(320, 520)
+transient = true
+theme = ExtResource("1_wirsx")
+script = ExtResource("1_f64kq")
+node = NodePath("Wrapper/VBoxContainer/MarginContainer/AspectRatio/TextureRect")
+aspect_ratio = NodePath("Wrapper/VBoxContainer/MarginContainer/AspectRatio")
+shader_node = NodePath("Wrapper")
+prop_box = NodePath("Wrapper/VBoxContainer/Panel/MarginContainer")
+animation_id_menu = NodePath("Wrapper/VBoxContainer/Panel/MarginContainer/VBoxContainer/Name/AnimationPicker")
+fps_spinner = NodePath("Wrapper/VBoxContainer/Panel/MarginContainer/VBoxContainer/FPS/SpinBox")
+grid_size_x = NodePath("Wrapper/VBoxContainer/Panel/MarginContainer/VBoxContainer/GridSize/X")
+grid_size_y = NodePath("Wrapper/VBoxContainer/Panel/MarginContainer/VBoxContainer/GridSize/Y")
+region_position_x = NodePath("Wrapper/VBoxContainer/Panel/MarginContainer/VBoxContainer/Position/X")
+region_position_y = NodePath("Wrapper/VBoxContainer/Panel/MarginContainer/VBoxContainer/Position/Y")
+region_size_x = NodePath("Wrapper/VBoxContainer/Panel/MarginContainer/VBoxContainer/Size/W")
+region_size_y = NodePath("Wrapper/VBoxContainer/Panel/MarginContainer/VBoxContainer/Size/H")
+
+[node name="Wrapper" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_4rl4s")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Wrapper"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Wrapper/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="AspectRatio" type="AspectRatioContainer" parent="Wrapper/VBoxContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="Wrapper/VBoxContainer/MarginContainer/AspectRatio"]
+layout_mode = 2
+script = ExtResource("3_3pqxv")
+
+[node name="Panel" type="Panel" parent="Wrapper/VBoxContainer"]
+custom_minimum_size = Vector2(0, 230)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_3berc")
+
+[node name="MarginContainer" type="MarginContainer" parent="Wrapper/VBoxContainer/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Wrapper/VBoxContainer/Panel/MarginContainer"]
+layout_mode = 2
+
+[node name="Name" type="HBoxContainer" parent="Wrapper/VBoxContainer/Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="AnimationID" type="Label" parent="Wrapper/VBoxContainer/Panel/MarginContainer/VBoxContainer/Name"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Animation"
+
+[node name="AnimationPicker" type="MenuButton" parent="Wrapper/VBoxContainer/Panel/MarginContainer/VBoxContainer/Name"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/normal = SubResource("StyleBoxFlat_c13d5")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_c13d5")
+theme_override_styles/hover = SubResource("StyleBoxFlat_c13d5")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_c13d5")
+theme_override_styles/focus = SubResource("StyleBoxFlat_c13d5")
+text = "AnimationPicker"
+icon_alignment = 2
+
+[node name="FPS" type="HBoxContainer" parent="Wrapper/VBoxContainer/Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="FPS" type="Label" parent="Wrapper/VBoxContainer/Panel/MarginContainer/VBoxContainer/FPS"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "FPS"
+
+[node name="SpinBox" type="SpinBox" parent="Wrapper/VBoxContainer/Panel/MarginContainer/VBoxContainer/FPS"]
+layout_mode = 2
+size_flags_horizontal = 3
+min_value = 1.0
+max_value = 320.0
+value = 1.0
+rounded = true
+
+[node name="GridLabel" type="Label" parent="Wrapper/VBoxContainer/Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Grid Size
+"
+
+[node name="GridSize" type="HBoxContainer" parent="Wrapper/VBoxContainer/Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="LabelX" type="Label" parent="Wrapper/VBoxContainer/Panel/MarginContainer/VBoxContainer/GridSize"]
+custom_minimum_size = Vector2(18, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.631373, 0.270588, 0.270588, 1)
+text = "x"
+
+[node name="X" type="SpinBox" parent="Wrapper/VBoxContainer/Panel/MarginContainer/VBoxContainer/GridSize"]
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 2480.0
+rounded = true
+suffix = "px"
+
+[node name="LabelY" type="Label" parent="Wrapper/VBoxContainer/Panel/MarginContainer/VBoxContainer/GridSize"]
+custom_minimum_size = Vector2(18, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.254902, 0.580392, 0.254902, 1)
+text = "y"
+
+[node name="Y" type="SpinBox" parent="Wrapper/VBoxContainer/Panel/MarginContainer/VBoxContainer/GridSize"]
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 2480.0
+rounded = true
+suffix = "px"
+
+[node name="RegionLabel" type="Label" parent="Wrapper/VBoxContainer/Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Region
+"
+
+[node name="Position" type="HBoxContainer" parent="Wrapper/VBoxContainer/Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="LabelX" type="Label" parent="Wrapper/VBoxContainer/Panel/MarginContainer/VBoxContainer/Position"]
+custom_minimum_size = Vector2(18, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.631373, 0.270588, 0.270588, 1)
+text = "x"
+
+[node name="X" type="SpinBox" parent="Wrapper/VBoxContainer/Panel/MarginContainer/VBoxContainer/Position"]
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 2480.0
+rounded = true
+suffix = "px"
+
+[node name="LabelY" type="Label" parent="Wrapper/VBoxContainer/Panel/MarginContainer/VBoxContainer/Position"]
+custom_minimum_size = Vector2(18, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.254902, 0.580392, 0.254902, 1)
+text = "y"
+
+[node name="Y" type="SpinBox" parent="Wrapper/VBoxContainer/Panel/MarginContainer/VBoxContainer/Position"]
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 2480.0
+rounded = true
+suffix = "px"
+
+[node name="Size" type="HBoxContainer" parent="Wrapper/VBoxContainer/Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="LabelW" type="Label" parent="Wrapper/VBoxContainer/Panel/MarginContainer/VBoxContainer/Size"]
+custom_minimum_size = Vector2(14, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.631373, 0.270588, 0.270588, 1)
+text = "w
+"
+
+[node name="W" type="SpinBox" parent="Wrapper/VBoxContainer/Panel/MarginContainer/VBoxContainer/Size"]
+layout_mode = 2
+size_flags_horizontal = 3
+min_value = 1.0
+max_value = 2480.0
+value = 1.0
+rounded = true
+suffix = "px"
+
+[node name="LabelH" type="Label" parent="Wrapper/VBoxContainer/Panel/MarginContainer/VBoxContainer/Size"]
+custom_minimum_size = Vector2(12, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.254902, 0.580392, 0.254902, 1)
+text = "h"
+
+[node name="H" type="SpinBox" parent="Wrapper/VBoxContainer/Panel/MarginContainer/VBoxContainer/Size"]
+layout_mode = 2
+size_flags_horizontal = 3
+min_value = 1.0
+max_value = 2480.0
+value = 1.0
+rounded = true
+suffix = "px"
+
+[connection signal="close_requested" from="." to="." method="_on_close_requested"]
