@@ -792,7 +792,10 @@ Switch active color palette to given grid position.
 Change image color if the color being used is the current active color palette to given color palette.
 
 (SHIFT+RMB)
-Change given palette color to opaque."
+Change given palette color to opaque.
+
+(ALT+LMB)
+Copy active color palette to given color palette."
 script = ExtResource("19_eprkn")
 color_picker = NodePath("../../../Picker/ScrollContainer/ColorPicker")
 
