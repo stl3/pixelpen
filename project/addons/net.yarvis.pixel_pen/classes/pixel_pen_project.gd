@@ -42,7 +42,7 @@ enum ProjectMode{
 }
 
 
-func initialized(p_size : Vector2i, p_name : String = "Untitled", p_checker_size : int = 16, p_file_path : String = ""):
+func initialized(p_size : Vector2i, p_name : String = "Untitled", p_checker_size : int = 16, p_file_path : String = "", one_layer : bool = true):
 	layer_index_counter = 0
 	project_name = p_name
 	canvas_size = p_size
@@ -51,8 +51,9 @@ func initialized(p_size : Vector2i, p_name : String = "Untitled", p_checker_size
 	palette.set_color_index_preset()
 	index_image.clear()
 	animation_sheets.clear()
-	add_layer()
-	active_layer_uuid = index_image[0].layer_uuid
+	if one_layer:
+		add_layer()
+		active_layer_uuid = index_image[0].layer_uuid
 
 
 func set_mode(mode : ProjectMode, mask : Image = null):
@@ -244,8 +245,8 @@ func delete_unused_color_palette():
 	
 	var new_palette_final : PackedColorArray = palette.color_index.duplicate()
 	var i = 0
-	while i < new_palette_final.size():
-		if new_palette_final[i] not in new_palette:
+	while i < new_palette_final.size() and i < palette.INDEX_COLOR_SIZE:
+		if new_palette_final[i] not in new_palette and new_palette_final[i] != Color.TRANSPARENT:
 			new_palette_final.remove_at(i)
 			new_palette_final.push_back(Color.TRANSPARENT)
 		else:

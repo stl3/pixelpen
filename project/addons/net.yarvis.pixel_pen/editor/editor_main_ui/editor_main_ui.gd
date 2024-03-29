@@ -130,7 +130,6 @@ func _on_project_file_changed():
 	file_popup.set_item_disabled(file_popup.get_item_index(FileID.EXPORT), disable )
 	file_popup.set_item_disabled(file_popup.get_item_index(FileID.QUICK_EXPORT), disable or quick_export_path_empty)
 	file_popup.set_item_disabled(file_popup.get_item_index(FileID.CLOSE), disable )
-	file_popup.set_item_disabled(file_popup.get_item_index(FileID.IMPORT), disable)
 	edit_menu.disabled = disable
 	palette_menu.disabled = disable
 	view_menu.disabled = disable
@@ -481,6 +480,32 @@ func _on_file_popup_pressed(id : int):
 		_save_as()
 		
 	elif id == FileID.IMPORT:
+		var callback_no_project = func(file : String):
+			if file != "":
+				var window : ConfirmationDialog = import_window.instantiate()
+				add_child(window)
+				window.confirmed.connect(func():
+						var image : Image = window.get_image() 
+						var current_project = PixelPenProject.new()
+						current_project.initialized(
+								image.get_size(), "Untitled", 16, "", false
+								)
+						PixelPen.current_project = current_project
+						var layer_uuid : String = PixelPen.current_project.import_image(image, file)
+						PixelPen.current_project.project_name = PixelPen.current_project.get_index_image(layer_uuid).label
+						window.closed.emit()
+						window.queue_free()
+						PixelPen.project_file_changed.emit()
+						)
+				window.canceled.connect(func():
+						window.closed.emit()
+						window.queue_free()
+						)
+				window.show_file(file)
+				window.popup_centered()
+				PixelPen.dialog_visibled.emit(true)
+				await window.closed
+				PixelPen.dialog_visibled.emit(false)
 		var callback = func(files : PackedStringArray):
 			if not files.is_empty():
 				(PixelPen.current_project as PixelPenProject).create_undo_layer_and_palette("Add layer", func ():
@@ -511,7 +536,10 @@ func _on_file_popup_pressed(id : int):
 				PixelPen.layer_items_changed.emit()
 				(PixelPen.current_project as PixelPenProject).property_changed.emit(false)
 				PixelPen.palette_changed.emit()
-		get_image_file(callback, FileDialog.FILE_MODE_OPEN_FILES)
+		if PixelPen.current_project == null:
+			get_image_file(callback_no_project, FileDialog.FILE_MODE_OPEN_FILE)
+		else:
+			get_image_file(callback, FileDialog.FILE_MODE_OPEN_FILES)
 	
 	elif id == FileID.QUICK_EXPORT:
 		var file : String = PixelPen.current_project.last_export_file_path
