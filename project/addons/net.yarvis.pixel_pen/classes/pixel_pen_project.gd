@@ -239,14 +239,17 @@ func delete_unused_color_palette():
 			for y in range(index_image[i].colormap.get_height()):
 				var idx : int = index_image[i].colormap.get_pixel(x, y).r8
 				var color : Color = palette.color_index[idx]
-				if new_palette.find(color) == -1:
+				if color not in new_palette:
 					new_palette.push_back(color)
 	
 	var new_palette_final : PackedColorArray = palette.color_index.duplicate()
-	for i in range(new_palette_final.size()):
-		if new_palette.find(new_palette_final[i]) == -1:
+	var i = 0
+	while i < new_palette_final.size():
+		if new_palette_final[i] not in new_palette:
 			new_palette_final.remove_at(i)
 			new_palette_final.push_back(Color.TRANSPARENT)
+		else:
+			i += 1
 	
 	var i_n = index_image.size()
 	for j in range(i_n):
