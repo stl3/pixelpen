@@ -307,8 +307,17 @@ func get_image() -> Image:
 	return canvas_image
 
 
-func import_image(path : String) -> String:
+func import_file(path : String) -> String:
 	var image : Image = Image.load_from_file(path)
+	image.convert(Image.FORMAT_RGBA8)
+	var image_size : Vector2i = image.get_size()
+	var layer_uuid = add_layer(path.get_file().get_basename(), active_layer_uuid)
+	var index_image : IndexedColorImage = get_index_image(layer_uuid)
+	palette.color_index = PixelPen.utils.import_image(index_image.colormap, image, palette.color_index)
+	return layer_uuid
+
+
+func import_image(image : Image, path : String) -> String:
 	image.convert(Image.FORMAT_RGBA8)
 	var image_size : Vector2i = image.get_size()
 	var layer_uuid = add_layer(path.get_file().get_basename(), active_layer_uuid)

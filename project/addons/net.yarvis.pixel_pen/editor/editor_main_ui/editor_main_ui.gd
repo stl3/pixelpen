@@ -7,6 +7,7 @@ const edit_canvas_size := preload("../edit_canvas_size.tscn")
 const startup_window := preload("../startup_window.tscn")
 const animation_preview_window := preload("../animation_sheet_preview.tscn")
 const image_reference_window := preload("../window_reference.tscn")
+const import_window := preload("../import_window.tscn")
 const shorcut : EditorShorcut = preload("../../resources/editor_shorcut.tres")
 
 const Tool := preload("../editor_canvas/tool.gd")
@@ -129,6 +130,7 @@ func _on_project_file_changed():
 	file_popup.set_item_disabled(file_popup.get_item_index(FileID.EXPORT), disable )
 	file_popup.set_item_disabled(file_popup.get_item_index(FileID.QUICK_EXPORT), disable or quick_export_path_empty)
 	file_popup.set_item_disabled(file_popup.get_item_index(FileID.CLOSE), disable )
+	file_popup.set_item_disabled(file_popup.get_item_index(FileID.IMPORT), disable)
 	edit_menu.disabled = disable
 	palette_menu.disabled = disable
 	view_menu.disabled = disable
@@ -487,7 +489,20 @@ func _on_file_popup_pressed(id : int):
 						PixelPen.palette_changed.emit()
 						)
 				for i in range(files.size()):
-					(PixelPen.current_project as PixelPenProject).import_image(files[i])
+					var window : ConfirmationDialog = import_window.instantiate()
+					add_child(window)
+					window.confirmed.connect(func():
+							(PixelPen.current_project as PixelPenProject).import_image(window.get_image() , files[i])
+							window.closed.emit()
+							window.queue_free()
+							)
+					window.canceled.connect(func():
+							window.closed.emit()
+							window.queue_free()
+							)
+					window.show_file(files[i])
+					window.popup_centered()
+					await window.closed
 				(PixelPen.current_project as PixelPenProject).create_redo_layer_and_palette(func ():
 						PixelPen.layer_items_changed.emit()
 						(PixelPen.current_project as PixelPenProject).property_changed.emit(false)
@@ -773,7 +788,10 @@ func get_image_file(callback : Callable, mode : FileDialog.FileMode = FileDialog
 			_file_dialog.queue_free()
 			)
 	_file_dialog.canceled.connect(func():
-			callback.call("")
+			if mode == FileDialog.FileMode.FILE_MODE_OPEN_FILES:
+				callback.call([])
+			else:
+				callback.call("")
 			_file_dialog.queue_free())
 	
 	add_child(_file_dialog)
