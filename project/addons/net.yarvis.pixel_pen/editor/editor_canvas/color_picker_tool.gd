@@ -20,18 +20,18 @@ func _on_mouse_released(mouse_position : Vector2, callback : Callable):
 	if pallete_idx != -1:
 		(PixelPen.current_project as PixelPenProject).create_undo_palette("Palette", func():
 				PixelPen.palette_changed.emit()
-				(PixelPen.current_project as PixelPenProject).property_changed.emit(false)
+				PixelPen.project_saved.emit(false)
 				)
 		
 		PixelPen.current_project.palette.color_index[_index_color] = PixelPen.current_project.palette.color_index[pallete_idx]
 		
 		(PixelPen.current_project as PixelPenProject).create_redo_palette(func():
 				PixelPen.palette_changed.emit()
-				(PixelPen.current_project as PixelPenProject).property_changed.emit(false)
+				PixelPen.project_saved.emit(false)
 				)
 		
 		PixelPen.palette_changed.emit()
-		(PixelPen.current_project as PixelPenProject).property_changed.emit(false)
+		PixelPen.project_saved.emit(false)
 
 
 func _on_shift_pressed(pressed : bool):

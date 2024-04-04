@@ -18,7 +18,7 @@ func _ready():
 			if PixelPen.current_project != null:
 				var sz = (PixelPen.current_project as PixelPenProject).canvas_size as Vector2
 				ratio = sz.x / sz.y
-				(PixelPen.current_project as PixelPenProject).property_changed.connect(func (_is_saved):
+				PixelPen.layer_items_changed.connect(func ():
 						if thread.is_started():
 							thread.wait_to_finish()
 						if preview_container.visible:

@@ -141,15 +141,16 @@ func delete_on_selected():
 			var mask = MaskSelection.get_image_no_margin(node.selection_tool_hint.texture.get_image())
 			(PixelPen.current_project as PixelPenProject).create_undo_layers("Paint", func ():
 					PixelPen.layer_items_changed.emit()
-					(PixelPen.current_project as PixelPenProject).property_changed.emit(false)
+					PixelPen.project_saved.emit(false)
 					)
 			index_image.empty_index_on_color_map(mask)
 			node._update_shader_layer()
 			(PixelPen.current_project as PixelPenProject).create_redo_layers(func ():
 				PixelPen.layer_items_changed.emit()
-				(PixelPen.current_project as PixelPenProject).property_changed.emit(false)
+				PixelPen.project_saved.emit(false)
 				)
-			(PixelPen.current_project as PixelPenProject).property_changed.emit(false)
+			PixelPen.layer_items_changed.emit()
+			PixelPen.project_saved.emit(false)
 
 
 func get_mirror_image(line : Vector2i, src_image : Image):

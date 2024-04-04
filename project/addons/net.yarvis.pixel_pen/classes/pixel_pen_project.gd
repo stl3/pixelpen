@@ -3,8 +3,6 @@
 class_name PixelPenProject
 extends Resource
 
-signal property_changed(is_saved)
-
 
 @export var project_name : String
 @export var file_path : String

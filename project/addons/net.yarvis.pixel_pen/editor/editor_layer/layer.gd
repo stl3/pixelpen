@@ -42,7 +42,7 @@ func _ready():
 	PixelPen.layer_active_changed.connect(func(uuid):
 			active(layer_uuid == uuid)
 			)
-	(PixelPen.current_project as PixelPenProject).property_changed.connect(func(saved):
+	PixelPen.layer_items_changed.connect(func():
 			if (PixelPen.current_project as PixelPenProject).active_layer_uuid == layer_uuid:
 				if thread.is_started():
 					thread.wait_to_finish()
@@ -96,7 +96,7 @@ func _on_visible_gui_input(event):
 					layer_visible = !layer_visible
 					index_image.visible = layer_visible
 					PixelPen.layer_visibility_changed.emit(layer_uuid, layer_visible)
-					PixelPen.current_project.property_changed.emit(false)
+					PixelPen.project_saved.emit(false)
 
 
 func _on_button_pressed():

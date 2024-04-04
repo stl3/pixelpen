@@ -36,7 +36,7 @@ func _on_mouse_released(mouse_position : Vector2, callback : Callable):
 	if _draw_rect_hint and rect.size != Vector2i.ZERO:
 		(PixelPen.current_project as PixelPenProject).create_undo_layers("Paint", func ():
 				PixelPen.layer_items_changed.emit()
-				(PixelPen.current_project as PixelPenProject).property_changed.emit(false)
+				PixelPen.project_saved.emit(false)
 				)
 		var mask_selection : Image
 		if node.selection_tool_hint.texture != null:
@@ -56,9 +56,10 @@ func _on_mouse_released(mouse_position : Vector2, callback : Callable):
 			paint_rect(h_rect, _index_color, mask_selection)
 		(PixelPen.current_project as PixelPenProject).create_redo_layers(func ():
 				PixelPen.layer_items_changed.emit()
-				(PixelPen.current_project as PixelPenProject).property_changed.emit(false)
+				PixelPen.project_saved.emit(false)
 				)
-		(PixelPen.current_project as PixelPenProject).property_changed.emit(false)
+		PixelPen.layer_items_changed.emit()
+		PixelPen.project_saved.emit(false)
 		callback.call()
 	
 	is_pressed = false

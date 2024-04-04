@@ -131,7 +131,7 @@ func _on_mouse_pressed(mouse_position : Vector2, callback : Callable):
 	
 	(PixelPen.current_project as PixelPenProject).create_undo_layers("Paint", func ():
 			PixelPen.layer_items_changed.emit()
-			(PixelPen.current_project as PixelPenProject).property_changed.emit(false)
+			PixelPen.project_saved.emit(false)
 			)
 	create_undo_overlay_position(node)
 	
@@ -181,9 +181,10 @@ func _on_mouse_released(mouse_position : Vector2, callback : Callable):
 	
 	(PixelPen.current_project as PixelPenProject).create_redo_layers(func ():
 			PixelPen.layer_items_changed.emit()
-			(PixelPen.current_project as PixelPenProject).property_changed.emit(false)
+			PixelPen.project_saved.emit(false)
 			)
-	(PixelPen.current_project as PixelPenProject).property_changed.emit(false)
+	PixelPen.layer_items_changed.emit()
+	PixelPen.project_saved.emit(false)
 	callback.call()
 	
 	_hold = false
@@ -432,7 +433,7 @@ func _on_move_cancel():
 		return
 	(PixelPen.current_project as PixelPenProject).create_undo_layers("Paint", func ():
 			PixelPen.layer_items_changed.emit()
-			(PixelPen.current_project as PixelPenProject).property_changed.emit(false)
+			PixelPen.project_saved.emit(false)
 			)
 	index_image.colormap = default_cache_map.duplicate()
 	if mask_selection != null:
@@ -444,10 +445,10 @@ func _on_move_cancel():
 	create_redo_overlay_position(node)
 	(PixelPen.current_project as PixelPenProject).create_redo_layers(func ():
 			PixelPen.layer_items_changed.emit()
-			(PixelPen.current_project as PixelPenProject).property_changed.emit(false)
+			PixelPen.project_saved.emit(false)
 			)
-	(PixelPen.current_project as PixelPenProject).property_changed.emit(false)
-	node._update_shader_layer()
+	PixelPen.layer_items_changed.emit()
+	PixelPen.project_saved.emit(false)
 	move_cache_image_map = null
 	node.selection_tool_hint.offset = -Vector2.ONE
 	node.overlay_hint.texture = null

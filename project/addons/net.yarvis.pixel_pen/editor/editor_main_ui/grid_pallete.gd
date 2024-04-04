@@ -105,7 +105,7 @@ func _color_item(wrapper_size : Vector2, item_size : Vector2):
 				if event.is_pressed() and event.button_index == MOUSE_BUTTON_LEFT:
 					if Input.is_key_pressed(KEY_SHIFT):
 						(PixelPen.current_project as PixelPenProject).create_undo_layers("switch color", func():
-								(PixelPen.current_project as PixelPenProject).property_changed.emit(false)
+								PixelPen.project_saved.emit(false)
 								PixelPen.palette_changed.emit()
 								)
 						var index_a = _item_focus + 1
@@ -117,15 +117,15 @@ func _color_item(wrapper_size : Vector2, item_size : Vector2):
 							(PixelPen.current_project as PixelPenProject).index_image[i].switch_color(index_a, index_b)
 						
 						(PixelPen.current_project as PixelPenProject).create_redo_layers(func():
-								(PixelPen.current_project as PixelPenProject).property_changed.emit(false)
+								PixelPen.project_saved.emit(false)
 								PixelPen.palette_changed.emit()
 								)
 						
-						(PixelPen.current_project as PixelPenProject).property_changed.emit(false)
+						PixelPen.project_saved.emit(false)
 						PixelPen.palette_changed.emit()
 					elif Input.is_key_pressed(KEY_ALT):
 						(PixelPen.current_project as PixelPenProject).create_undo_palette("copy palette", func():
-								(PixelPen.current_project as PixelPenProject).property_changed.emit(false)
+								PixelPen.project_saved.emit(false)
 								PixelPen.palette_changed.emit()
 								)
 							
@@ -134,11 +134,11 @@ func _color_item(wrapper_size : Vector2, item_size : Vector2):
 						_colors_index[_item_focus + 1] = copied_color
 						
 						(PixelPen.current_project as PixelPenProject).create_redo_palette(func():
-								(PixelPen.current_project as PixelPenProject).property_changed.emit(false)
+								PixelPen.project_saved.emit(false)
 								PixelPen.palette_changed.emit()
 								)
 							
-						(PixelPen.current_project as PixelPenProject).property_changed.emit(false)
+						PixelPen.project_saved.emit(false)
 						PixelPen.palette_changed.emit()
 					else:
 						_item_focus = _child_item.find(wrapper)
@@ -148,7 +148,7 @@ func _color_item(wrapper_size : Vector2, item_size : Vector2):
 				elif event.is_pressed() and event.button_index == MOUSE_BUTTON_RIGHT:
 					if Input.is_key_pressed(KEY_SHIFT):
 						(PixelPen.current_project as PixelPenProject).create_undo_palette("copy palette", func():
-								(PixelPen.current_project as PixelPenProject).property_changed.emit(false)
+								PixelPen.project_saved.emit(false)
 								PixelPen.palette_changed.emit()
 								)
 								
@@ -156,15 +156,15 @@ func _color_item(wrapper_size : Vector2, item_size : Vector2):
 						_colors_index[_item_focus + 1].a = 1.0
 						
 						(PixelPen.current_project as PixelPenProject).create_redo_palette(func():
-								(PixelPen.current_project as PixelPenProject).property_changed.emit(false)
+								PixelPen.project_saved.emit(false)
 								PixelPen.palette_changed.emit()
 								)
 							
-						(PixelPen.current_project as PixelPenProject).property_changed.emit(false)
+						PixelPen.project_saved.emit(false)
 						PixelPen.palette_changed.emit()
 					else:
 						(PixelPen.current_project as PixelPenProject).create_undo_layer_and_palette("switch palette position", func():
-								(PixelPen.current_project as PixelPenProject).property_changed.emit(false)
+								PixelPen.project_saved.emit(false)
 								PixelPen.palette_changed.emit()
 								)
 						
@@ -181,11 +181,11 @@ func _color_item(wrapper_size : Vector2, item_size : Vector2):
 							(PixelPen.current_project as PixelPenProject).index_image[i].switch_palette(index_a, index_b)
 						
 						(PixelPen.current_project as PixelPenProject).create_redo_layer_and_palette(func():
-								(PixelPen.current_project as PixelPenProject).property_changed.emit(false)
+								PixelPen.project_saved.emit(false)
 								PixelPen.palette_changed.emit()
 								)
 							
-						(PixelPen.current_project as PixelPenProject).property_changed.emit(false)
+						PixelPen.project_saved.emit(false)
 						PixelPen.palette_changed.emit()
 			)
 	return wrapper
@@ -201,4 +201,4 @@ func _on_color_picker_color_changed(color):
 	_colors_index[_item_focus + 1] = color
 	
 	PixelPen.color_picked.emit(_item_focus + 1)
-	(PixelPen.current_project as PixelPenProject).property_changed.emit(false)
+	PixelPen.project_saved.emit(false)

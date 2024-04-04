@@ -7,6 +7,7 @@ signal theme_changed
 
 signal debug_log(key, value)
 signal project_file_changed
+signal project_saved(is_saved)
 signal palette_changed
 signal color_picked(color)
 signal dialog_visibled(visible)

@@ -40,46 +40,44 @@ func init():
 	fps_spinner.value_changed.connect(func (v):
 			anim_sheet.fps = v
 			create_animation()
-			(PixelPen.current_project as PixelPenProject).property_changed.emit(false)
+			PixelPen.project_saved.emit(false)
 			)
 	grid_size_x.value_changed.connect(func (v):
 			anim_sheet.grid_size.x = v
 			create_animation()
-			(PixelPen.current_project as PixelPenProject).property_changed.emit(false)
+			PixelPen.project_saved.emit(false)
 			)
 	grid_size_y.value_changed.connect(func (v):
 			anim_sheet.grid_size.y = v
 			create_animation()
-			(PixelPen.current_project as PixelPenProject).property_changed.emit(false)
+			PixelPen.project_saved.emit(false)
 			)
 	region_position_x.value_changed.connect(func (v):
 			anim_sheet.region.position.x = v
 			create_animation()
-			(PixelPen.current_project as PixelPenProject).property_changed.emit(false)
+			PixelPen.project_saved.emit(false)
 			)
 	region_position_y.value_changed.connect(func (v):
 			anim_sheet.region.position.y = v
 			create_animation()
-			(PixelPen.current_project as PixelPenProject).property_changed.emit(false)
+			PixelPen.project_saved.emit(false)
 			)
 	region_size_x.value_changed.connect(func (v):
 			anim_sheet.region.size.x = v
 			create_animation()
-			(PixelPen.current_project as PixelPenProject).property_changed.emit(false)
+			PixelPen.project_saved.emit(false)
 			)
 	region_size_y.value_changed.connect(func (v):
 			anim_sheet.region.size.y = v
 			create_animation()
-			(PixelPen.current_project as PixelPenProject).property_changed.emit(false)
+			PixelPen.project_saved.emit(false)
 			)
 	PixelPen.project_file_changed.connect(func():
 			if PixelPen.current_project == null:
 				hide()
 				queue_free()
 			)
-	(PixelPen.current_project as PixelPenProject).property_changed.connect(func(state):
-			create_animation()
-			)
+	PixelPen.layer_items_changed.connect(create_animation)
 	var sheets : Array[AnimationSheet] = (PixelPen.current_project as PixelPenProject).animation_sheets
 	if sheets.is_empty():
 		sheets.push_back(AnimationSheet.create())

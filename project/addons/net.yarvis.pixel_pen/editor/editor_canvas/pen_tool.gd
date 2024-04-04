@@ -39,7 +39,7 @@ func _on_mouse_pressed(mouse_position : Vector2, callback : Callable):
 			is_pressed_outside = false
 			(PixelPen.current_project as PixelPenProject).create_undo_layers("Paint", func ():
 					PixelPen.layer_items_changed.emit()
-					(PixelPen.current_project as PixelPenProject).property_changed.emit(false)
+					PixelPen.project_saved.emit(false)
 					)
 			if tool_type == PixelPen.ToolBox.TOOL_PEN:
 				_prev_paint_coord3.clear()
@@ -86,9 +86,10 @@ func _on_mouse_released(mouse_position : Vector2, callback : Callable):
 					
 		(PixelPen.current_project as PixelPenProject).create_redo_layers(func ():
 				PixelPen.layer_items_changed.emit()
-				(PixelPen.current_project as PixelPenProject).property_changed.emit(false)
+				PixelPen.project_saved.emit(false)
 				)
-		(PixelPen.current_project as PixelPenProject).property_changed.emit(false)
+		PixelPen.layer_items_changed.emit()
+		PixelPen.project_saved.emit(false)
 	is_pressed = false
 	is_pressed_outside = false
 
@@ -132,7 +133,7 @@ func _on_mouse_motion(mouse_position : Vector2, event_relative : Vector2, callba
 				is_pressed_outside = false
 				(PixelPen.current_project as PixelPenProject).create_undo_layers("Paint", func ():
 					PixelPen.layer_items_changed.emit()
-					(PixelPen.current_project as PixelPenProject).property_changed.emit(false)
+					PixelPen.project_saved.emit(false)
 					)
 				_prev_paint_coord3.clear()
 				_prev_replaced_color3.clear()

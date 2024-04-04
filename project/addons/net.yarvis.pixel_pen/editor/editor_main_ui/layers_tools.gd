@@ -42,30 +42,30 @@ func _on_add_pressed():
 	window.confirmed.connect(func():
 			(PixelPen.current_project as PixelPenProject).create_undo_layers("Add layer", func ():
 					PixelPen.layer_items_changed.emit()
-					(PixelPen.current_project as PixelPenProject).property_changed.emit(false)
+					PixelPen.project_saved.emit(false)
 					)
 			(PixelPen.current_project as PixelPenProject).add_layer(window.layer_name, PixelPen.current_project.active_layer_uuid)
 			(PixelPen.current_project as PixelPenProject).create_redo_layers(func ():
 					PixelPen.layer_items_changed.emit()
-					(PixelPen.current_project as PixelPenProject).property_changed.emit(false)
+					PixelPen.project_saved.emit(false)
 					)
 			PixelPen.layer_items_changed.emit()
-			(PixelPen.current_project as PixelPenProject).property_changed.emit(false)
+			PixelPen.project_saved.emit(false)
 			)
 
 
 func _on_duplicate_layer():
 	(PixelPen.current_project as PixelPenProject).create_undo_layers("Duplicate layer", func ():
 			PixelPen.layer_items_changed.emit()
-			(PixelPen.current_project as PixelPenProject).property_changed.emit(false)
+			PixelPen.project_saved.emit(false)
 			)
 	(PixelPen.current_project as PixelPenProject).duplicate_layer(PixelPen.current_project.active_layer_uuid)
 	(PixelPen.current_project as PixelPenProject).create_redo_layers(func ():
 			PixelPen.layer_items_changed.emit()
-			(PixelPen.current_project as PixelPenProject).property_changed.emit(false)
+			PixelPen.project_saved.emit(false)
 			)
 	PixelPen.layer_items_changed.emit()
-	(PixelPen.current_project as PixelPenProject).property_changed.emit(false)
+	PixelPen.project_saved.emit(false)
 
 
 func _on_copy_layer():
@@ -119,29 +119,29 @@ func _on_cut_selection():
 	
 	(PixelPen.current_project as PixelPenProject).create_undo_layers("Cut selection", func ():
 			PixelPen.layer_items_changed.emit()
-			(PixelPen.current_project as PixelPenProject).property_changed.emit(false)
+			PixelPen.project_saved.emit(false)
 			)
 	index_image.empty_index_on_color_map(mask_selection)
 	(PixelPen.current_project as PixelPenProject).create_redo_layers(func ():
 			PixelPen.layer_items_changed.emit()
-			(PixelPen.current_project as PixelPenProject).property_changed.emit(false)
+			PixelPen.project_saved.emit(false)
 			)
 	PixelPen.layer_items_changed.emit()
-	(PixelPen.current_project as PixelPenProject).property_changed.emit(false)
+	PixelPen.project_saved.emit(false)
 
 
 func _on_paste():
 	(PixelPen.current_project as PixelPenProject).create_undo_layers("Paste layer", func ():
 			PixelPen.layer_items_changed.emit()
-			(PixelPen.current_project as PixelPenProject).property_changed.emit(false)
+			PixelPen.project_saved.emit(false)
 			)
 	(PixelPen.current_project as PixelPenProject).paste_copied_layer(PixelPen.current_project.active_layer_uuid)
 	(PixelPen.current_project as PixelPenProject).create_redo_layers(func ():
 			PixelPen.layer_items_changed.emit()
-			(PixelPen.current_project as PixelPenProject).property_changed.emit(false)
+			PixelPen.project_saved.emit(false)
 			)
 	PixelPen.layer_items_changed.emit()
-	(PixelPen.current_project as PixelPenProject).property_changed.emit(false)
+	PixelPen.project_saved.emit(false)
 	(PixelPen.current_project as PixelPenProject).cache_copied_colormap = null
 
 
@@ -156,7 +156,7 @@ func _on_merge_down():
 	
 	(PixelPen.current_project as PixelPenProject).create_undo_layers("Merge down", func ():
 			PixelPen.layer_items_changed.emit()
-			(PixelPen.current_project as PixelPenProject).property_changed.emit(false)
+			PixelPen.project_saved.emit(false)
 			)
 	
 	var active_img = (PixelPen.current_project as PixelPenProject).active_layer.get_color_map_with_mask()
@@ -167,10 +167,10 @@ func _on_merge_down():
 	
 	(PixelPen.current_project as PixelPenProject).create_redo_layers(func ():
 			PixelPen.layer_items_changed.emit()
-			(PixelPen.current_project as PixelPenProject).property_changed.emit(false)
+			PixelPen.project_saved.emit(false)
 			)
 	PixelPen.layer_items_changed.emit()
-	(PixelPen.current_project as PixelPenProject).property_changed.emit(false)
+	PixelPen.project_saved.emit(false)
 
 
 func _on_merge_visible():
@@ -179,7 +179,7 @@ func _on_merge_visible():
 	
 	(PixelPen.current_project as PixelPenProject).create_undo_layers("Merge visible", func ():
 			PixelPen.layer_items_changed.emit()
-			(PixelPen.current_project as PixelPenProject).property_changed.emit(false)
+			PixelPen.project_saved.emit(false)
 			)
 	var j = 0
 	for i in range((PixelPen.current_project as PixelPenProject).index_image.size() -1, -1, -1):
@@ -202,10 +202,10 @@ func _on_merge_visible():
 	
 	(PixelPen.current_project as PixelPenProject).create_redo_layers(func ():
 			PixelPen.layer_items_changed.emit()
-			(PixelPen.current_project as PixelPenProject).property_changed.emit(false)
+			PixelPen.project_saved.emit(false)
 			)
 	PixelPen.layer_items_changed.emit()
-	(PixelPen.current_project as PixelPenProject).property_changed.emit(false)
+	PixelPen.project_saved.emit(false)
 
 
 func _on_merge_all():
@@ -214,7 +214,7 @@ func _on_merge_all():
 	
 	(PixelPen.current_project as PixelPenProject).create_undo_layers("Merge all", func ():
 			PixelPen.layer_items_changed.emit()
-			(PixelPen.current_project as PixelPenProject).property_changed.emit(false)
+			PixelPen.project_saved.emit(false)
 			)
 	var j = 0
 	for i in range((PixelPen.current_project as PixelPenProject).index_image.size() -1, -1, -1):
@@ -233,42 +233,42 @@ func _on_merge_all():
 	
 	(PixelPen.current_project as PixelPenProject).create_redo_layers(func ():
 			PixelPen.layer_items_changed.emit()
-			(PixelPen.current_project as PixelPenProject).property_changed.emit(false)
+			PixelPen.project_saved.emit(false)
 			)
 	PixelPen.layer_items_changed.emit()
-	(PixelPen.current_project as PixelPenProject).property_changed.emit(false)
+	PixelPen.project_saved.emit(false)
 
 
 func _on_hide_all():
 	(PixelPen.current_project as PixelPenProject).create_undo_layers("Remove layer", func ():
 			PixelPen.layer_items_changed.emit()
-			(PixelPen.current_project as PixelPenProject).property_changed.emit(false)
+			PixelPen.project_saved.emit(false)
 			)
 	for img in (PixelPen.current_project as PixelPenProject).index_image:
 		img.visible = false
 	(PixelPen.current_project as PixelPenProject).create_redo_layers(func ():
 			PixelPen.layer_items_changed.emit()
-			(PixelPen.current_project as PixelPenProject).property_changed.emit(false)
+			PixelPen.project_saved.emit(false)
 			)
 	
 	PixelPen.layer_items_changed.emit()
-	(PixelPen.current_project as PixelPenProject).property_changed.emit(false)
+	PixelPen.project_saved.emit(false)
 
 
 func _on_show_all():
 	(PixelPen.current_project as PixelPenProject).create_undo_layers("Remove layer", func ():
 			PixelPen.layer_items_changed.emit()
-			(PixelPen.current_project as PixelPenProject).property_changed.emit(false)
+			PixelPen.project_saved.emit(false)
 			)
 	for img in (PixelPen.current_project as PixelPenProject).index_image:
 		img.visible = true
 	(PixelPen.current_project as PixelPenProject).create_redo_layers(func ():
 			PixelPen.layer_items_changed.emit()
-			(PixelPen.current_project as PixelPenProject).property_changed.emit(false)
+			PixelPen.project_saved.emit(false)
 			)
 	
 	PixelPen.layer_items_changed.emit()
-	(PixelPen.current_project as PixelPenProject).property_changed.emit(false)
+	PixelPen.project_saved.emit(false)
 
 
 func _on_apply_prev_move_transform():
@@ -278,7 +278,7 @@ func _on_apply_prev_move_transform():
 	
 	(PixelPen.current_project as PixelPenProject).create_undo_layers("Apply prev move transform", func ():
 			PixelPen.layer_items_changed.emit()
-			(PixelPen.current_project as PixelPenProject).property_changed.emit(false)
+			PixelPen.project_saved.emit(false)
 			)
 	
 	var move_cache_image_map = index_image.get_color_map_with_mask(MoveTool.cache_move_transform_mask)
@@ -287,11 +287,11 @@ func _on_apply_prev_move_transform():
 	
 	(PixelPen.current_project as PixelPenProject).create_redo_layers(func ():
 			PixelPen.layer_items_changed.emit()
-			(PixelPen.current_project as PixelPenProject).property_changed.emit(false)
+			PixelPen.project_saved.emit(false)
 			)
 	
 	PixelPen.layer_items_changed.emit()
-	(PixelPen.current_project as PixelPenProject).property_changed.emit(false)
+	PixelPen.project_saved.emit(false)
 
 
 func _on_folder_pressed():
@@ -301,16 +301,16 @@ func _on_folder_pressed():
 func _on_trash_pressed():
 	(PixelPen.current_project as PixelPenProject).create_undo_layers("Remove layer", func ():
 			PixelPen.layer_items_changed.emit()
-			(PixelPen.current_project as PixelPenProject).property_changed.emit(false)
+			PixelPen.project_saved.emit(false)
 			)
 	PixelPen.current_project.delete_layer(PixelPen.current_project.active_layer_uuid)
 	(PixelPen.current_project as PixelPenProject).create_redo_layers(func ():
 			PixelPen.layer_items_changed.emit()
-			(PixelPen.current_project as PixelPenProject).property_changed.emit(false)
+			PixelPen.project_saved.emit(false)
 			)
 	
 	PixelPen.layer_items_changed.emit()
-	(PixelPen.current_project as PixelPenProject).property_changed.emit(false)
+	PixelPen.project_saved.emit(false)
 
 
 func _on_menu_pressed():

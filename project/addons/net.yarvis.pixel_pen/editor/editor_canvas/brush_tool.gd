@@ -40,7 +40,7 @@ func _on_mouse_pressed(mouse_position : Vector2, callback : Callable):
 			
 		(PixelPen.current_project as PixelPenProject).create_undo_layers("Paint", func ():
 				PixelPen.layer_items_changed.emit()
-				(PixelPen.current_project as PixelPenProject).property_changed.emit(false)
+				PixelPen.project_saved.emit(false)
 				)
 				
 		var img : Image = index_image.colormap.duplicate()
@@ -50,9 +50,10 @@ func _on_mouse_pressed(mouse_position : Vector2, callback : Callable):
 		
 		(PixelPen.current_project as PixelPenProject).create_redo_layers(func ():
 				PixelPen.layer_items_changed.emit()
-				(PixelPen.current_project as PixelPenProject).property_changed.emit(false)
+				PixelPen.project_saved.emit(false)
 				)
-		(PixelPen.current_project as PixelPenProject).property_changed.emit(false)
+		PixelPen.layer_items_changed.emit()
+		PixelPen.project_saved.emit(false)
 		callback.call()
 
 

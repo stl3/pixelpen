@@ -143,9 +143,6 @@ func _on_project_file_changed():
 		if not ok:
 			_on_request_startup_window()
 	
-	if PixelPen.current_project != null and not PixelPen.current_project.property_changed.is_connected(_on_property_changed):
-		(PixelPen.current_project as PixelPenProject).property_changed.connect(_on_property_changed)
-	
 	if PixelPen.current_project != null:
 		PixelPen.current_project.undo_redo = UndoRedoManager.new()
 		
@@ -327,10 +324,11 @@ func connect_signal():
 	PixelPen.request_save_project.connect(_save)
 	PixelPen.request_save_as_project.connect(_save_as)
 	PixelPen.project_file_changed.connect(_on_project_file_changed)
+	PixelPen.project_saved.connect(_on_project_saved)
 	canvas.selection_tool_hint.texture_changed.connect(_on_selection_texture_changed)
 
 
-func _on_property_changed(is_saved : bool):
+func _on_project_saved(is_saved : bool):
 	if PixelPen.current_project != null:
 		PixelPen.current_project.is_saved = is_saved
 	_update_title()
@@ -408,7 +406,7 @@ func _save_project(file_path : String):
 	var err = ResourceSaver.save(PixelPen.current_project, file_path)
 	if err == OK:
 		PixelPen.current_project.is_saved = true
-		(PixelPen.current_project as PixelPenProject).property_changed.emit(true)
+		PixelPen.project_saved.emit(true)
 	else:
 		PixelPen.current_project.file_path = prev_path
 		PixelPen.current_project.project_name = prev_name
@@ -510,7 +508,7 @@ func _on_file_popup_pressed(id : int):
 			if not files.is_empty():
 				(PixelPen.current_project as PixelPenProject).create_undo_layer_and_palette("Add layer", func ():
 						PixelPen.layer_items_changed.emit()
-						(PixelPen.current_project as PixelPenProject).property_changed.emit(false)
+						PixelPen.project_saved.emit(false)
 						PixelPen.palette_changed.emit()
 						)
 				for i in range(files.size()):
@@ -530,11 +528,11 @@ func _on_file_popup_pressed(id : int):
 					await window.closed
 				(PixelPen.current_project as PixelPenProject).create_redo_layer_and_palette(func ():
 						PixelPen.layer_items_changed.emit()
-						(PixelPen.current_project as PixelPenProject).property_changed.emit(false)
+						PixelPen.project_saved.emit(false)
 						PixelPen.palette_changed.emit()
 						)
 				PixelPen.layer_items_changed.emit()
-				(PixelPen.current_project as PixelPenProject).property_changed.emit(false)
+				PixelPen.project_saved.emit(false)
 				PixelPen.palette_changed.emit()
 		if PixelPen.current_project == null:
 			get_image_file(callback_no_project, FileDialog.FILE_MODE_OPEN_FILE)
@@ -550,7 +548,7 @@ func _on_file_popup_pressed(id : int):
 			(PixelPen.current_project as PixelPenProject).export_png_image(file)
 		elif ext == "webp":
 			(PixelPen.current_project as PixelPenProject).export_webp_image(file)
-		(PixelPen.current_project as PixelPenProject).property_changed.emit(false)
+		PixelPen.project_saved.emit(false)
 		
 		##TODO: remove below on export debug
 		if get_window().has_method("scan"):
@@ -595,73 +593,73 @@ func _on_palette_popup_pressed(id : int):
 	if id == PaletteID.RESET:
 		(PixelPen.current_project as PixelPenProject).create_undo_palette("Palette", func():
 				PixelPen.palette_changed.emit()
-				(PixelPen.current_project as PixelPenProject).property_changed.emit(false)
+				PixelPen.project_saved.emit(false)
 				)
 				
 		(PixelPen.current_project as PixelPenProject).palette.set_color_index_preset()
 		
 		(PixelPen.current_project as PixelPenProject).create_redo_palette(func():
 				PixelPen.palette_changed.emit()
-				(PixelPen.current_project as PixelPenProject).property_changed.emit(false)
+				PixelPen.project_saved.emit(false)
 				)
 		PixelPen.palette_changed.emit()
-		(PixelPen.current_project as PixelPenProject).property_changed.emit(false)
+		PixelPen.project_saved.emit(false)
 		
 	elif id == PaletteID.SORT_COLOR:
 		(PixelPen.current_project as PixelPenProject).create_undo_layer_and_palette("Sort palette", func():
 				PixelPen.palette_changed.emit()
-				(PixelPen.current_project as PixelPenProject).property_changed.emit(false)
+				PixelPen.project_saved.emit(false)
 				)
 		(PixelPen.current_project as PixelPenProject).sort_palette()
 		(PixelPen.current_project as PixelPenProject).create_redo_layer_and_palette(func():
 				PixelPen.palette_changed.emit()
-				(PixelPen.current_project as PixelPenProject).property_changed.emit(false)
+				PixelPen.project_saved.emit(false)
 				)
 		PixelPen.palette_changed.emit()
-		(PixelPen.current_project as PixelPenProject).property_changed.emit(false)
+		PixelPen.project_saved.emit(false)
 		
 	elif id == PaletteID.DELETE_UNUSED:
 		(PixelPen.current_project as PixelPenProject).create_undo_layer_and_palette("Sort palette", func():
 				PixelPen.palette_changed.emit()
-				(PixelPen.current_project as PixelPenProject).property_changed.emit(false)
+				PixelPen.project_saved.emit(false)
 				)
 		(PixelPen.current_project as PixelPenProject).delete_unused_color_palette()
 		(PixelPen.current_project as PixelPenProject).create_redo_layer_and_palette(func():
 				PixelPen.palette_changed.emit()
-				(PixelPen.current_project as PixelPenProject).property_changed.emit(false)
+				PixelPen.project_saved.emit(false)
 				)
 		PixelPen.palette_changed.emit()
-		(PixelPen.current_project as PixelPenProject).property_changed.emit(false)
+		PixelPen.project_saved.emit(false)
 	elif id == PaletteID.DELETE_SELECTED_COLOR:
 		(PixelPen.current_project as PixelPenProject).create_undo_layer_and_palette("Sort palette", func():
 				PixelPen.palette_changed.emit()
-				(PixelPen.current_project as PixelPenProject).property_changed.emit(false)
+				PixelPen.project_saved.emit(false)
 				)
 		(PixelPen.current_project as PixelPenProject).delete_color(Tool._index_color)
 		(PixelPen.current_project as PixelPenProject).create_redo_layer_and_palette(func():
 				PixelPen.palette_changed.emit()
-				(PixelPen.current_project as PixelPenProject).property_changed.emit(false)
+				PixelPen.project_saved.emit(false)
 				)
 		PixelPen.palette_changed.emit()
-		(PixelPen.current_project as PixelPenProject).property_changed.emit(false)
+		PixelPen.project_saved.emit(false)
 	
 	elif id == PaletteID.LOAD_AND_REPLACE:
 		var callback = func(file):
 			if file != "":
 				(PixelPen.current_project as PixelPenProject).create_undo_palette("Load palette", func():
 						PixelPen.palette_changed.emit()
-						(PixelPen.current_project as PixelPenProject).property_changed.emit(false)
+						PixelPen.project_saved.emit(false)
 						)
 				
 				(PixelPen.current_project as PixelPenProject).palette.load_image(file)
 				
 				(PixelPen.current_project as PixelPenProject).create_redo_palette(func():
 						PixelPen.palette_changed.emit()
-						(PixelPen.current_project as PixelPenProject).property_changed.emit(false)
+						PixelPen.project_saved.emit(false)
 						)
 				
 				PixelPen.palette_changed.emit()
-				(PixelPen.current_project as PixelPenProject).property_changed.emit(false)
+				PixelPen.project_saved.emit(false)
 		get_image_file(callback, FileDialog.FILE_MODE_OPEN_FILE)
 		
 	elif id == PaletteID.LOAD_AND_MERGE:
@@ -669,18 +667,18 @@ func _on_palette_popup_pressed(id : int):
 			if file != "":
 				(PixelPen.current_project as PixelPenProject).create_undo_palette("Load palette", func():
 						PixelPen.palette_changed.emit()
-						(PixelPen.current_project as PixelPenProject).property_changed.emit(false)
+						PixelPen.project_saved.emit(false)
 						)
 				
 				(PixelPen.current_project as PixelPenProject).palette.load_image(file, true)
 				
 				(PixelPen.current_project as PixelPenProject).create_redo_palette(func():
 						PixelPen.palette_changed.emit()
-						(PixelPen.current_project as PixelPenProject).property_changed.emit(false)
+						PixelPen.project_saved.emit(false)
 						)
 				
 				PixelPen.palette_changed.emit()
-				(PixelPen.current_project as PixelPenProject).property_changed.emit(false)
+				PixelPen.project_saved.emit(false)
 		get_image_file(callback, FileDialog.FILE_MODE_OPEN_FILE)
 		
 	elif id == PaletteID.SAVE:
@@ -789,6 +787,7 @@ func _on_view_popup_pressed(id : int):
 			layer.silhouette = not layer.silhouette and layer.layer_uuid == active_layer_uuid
 			canvas.silhouette = canvas.silhouette or layer.silhouette
 		PixelPen.layer_items_changed.emit()
+		PixelPen.project_saved.emit(false)
 		popup.set_item_checked(index, canvas.silhouette)
 	elif id == ViewID.FILTER_GRAYSCALE:
 		popup.set_item_checked(index, not popup.is_item_checked(index))
@@ -850,7 +849,7 @@ func _open_canvas_size_window():
 					edit_canvas_window.anchor
 				)
 				PixelPen.project_file_changed.emit()
-				(PixelPen.current_project as PixelPenProject).property_changed.emit(false)
+				PixelPen.project_saved.emit(false)
 			edit_canvas_window.queue_free()
 			)
 	edit_canvas_window.canceled.connect(func():

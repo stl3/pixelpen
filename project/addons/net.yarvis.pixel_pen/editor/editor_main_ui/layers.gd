@@ -63,11 +63,13 @@ func _on_pickable_pressed(mouse_pos : Vector2, layer_uuid : String, state : int)
 		layers.insert(pick_index, item)
 		(PixelPen.current_project as PixelPenProject).create_undo_layers("Reorder layer", func ():
 				PixelPen.layer_items_changed.emit()
+				PixelPen.project_saved.emit(false)
 				)
 		(PixelPen.current_project as PixelPenProject).index_image = layers
 		
 		(PixelPen.current_project as PixelPenProject).create_redo_layers(func ():
 				PixelPen.layer_items_changed.emit()
+				PixelPen.project_saved.emit(false)
 				)
 						
 		PixelPen.layer_items_changed.emit()

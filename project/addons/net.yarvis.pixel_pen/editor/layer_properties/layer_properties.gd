@@ -31,15 +31,15 @@ func _on_confirmed():
 	if layer_uuid != "" and line_edit.text != layer_name and line_edit.text != "":
 		(PixelPen.current_project as PixelPenProject).create_undo_layers("Layer Properties", func ():
 				PixelPen.layer_items_changed.emit()
-				(PixelPen.current_project as PixelPenProject).property_changed.emit(false)
+				PixelPen.project_saved.emit(false)
 				)
 		(PixelPen.current_project as PixelPenProject).get_index_image(layer_uuid).label = line_edit.text
 		(PixelPen.current_project as PixelPenProject).create_redo_layers(func ():
 				PixelPen.layer_items_changed.emit()
-				(PixelPen.current_project as PixelPenProject).property_changed.emit(false)
+				PixelPen.project_saved.emit(false)
 				)
 		PixelPen.layer_items_changed.emit()
-		(PixelPen.current_project as PixelPenProject).property_changed.emit(false)
+		PixelPen.project_saved.emit(false)
 	else:
 		layer_name = line_edit.text
 	last_position = position
