@@ -7,6 +7,12 @@ Pixel Pen is a free and open source pixel art editor, proudly created with the G
 ## Download
 - [Addons](https://github.com/bayu-sw/pixelpen/releases)
 
+## Web Demo
+
+This is just a preview, some features may not work properly.
+
+- [pixelpen-dev.github.io](https://pixelpen-dev.github.io/)
+
 ## Licensing
 
 MIT (See copyright file for more informations)

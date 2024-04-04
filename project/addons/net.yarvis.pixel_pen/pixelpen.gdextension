@@ -24,3 +24,6 @@ android.release.arm64 = "bin/libpixelpen.android.release.arm64.so"
 
 ios.debug = "bin/libpixelpen.ios.debug.universal.dylib"
 ios.release = "bin/libpixelpen.ios.release.universal.dylib"
+
+web.debug = "bin/libpixelpen.web.debug.wasm32.wasm"
+web.release = "bin/libpixelpen.web.release.wasm32.wasm"

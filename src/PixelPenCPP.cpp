@@ -34,7 +34,7 @@ PixelPenCPP::~PixelPenCPP(){
 
 
 String PixelPenCPP::version(){
-    return "v0.0.1.alpha_build_1";
+    return "v0.0.1.alpha_build_2";
 }
 
 
